@@ -7,6 +7,10 @@ package Principal;
 
 import ModeloTablas.ModeloAutobuses;
 import ModeloTablas.ModeloTrabajador;
+import ModeloTablas.ModeloCliente;
+import ModeloTablas.ModeloRuta;
+import ModeloTablas.ModeloFactura;
+
 import java.awt.Image;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -367,6 +371,18 @@ public class VentanaBajas extends javax.swing.JFrame {
         t_autobus.setModel(moAuto);
         TableRowSorter<ModeloAutobuses> ordenarBuses= new TableRowSorter<ModeloAutobuses>(moAuto);
         t_autobus.setRowSorter(ordenarBuses);
+        //TABLA CLIENTES
+        ModeloCliente moCli = new ModeloCliente(laGestora.getLosClientes());
+        t_cliente.setModel(moCli);
+                    //falta rowSorter pa ke kede más shulo
+        //TABLA RUTAS
+        ModeloRuta moRut = new ModeloRuta(laGestora.getLasRutas());
+        t_ruta.setModel(moRut);
+                    //falta rowSorter pa ke kede más shulo
+        //TABLA FACTURAS
+        ModeloFactura moFac = new ModeloFactura(laGestora.getLasFacturas());
+        t_factura.setModel(moFac);
+                    //falta rowSorter pa ke kede más shulo
     }//GEN-LAST:event_formWindowOpened
 
     private void b_filtrarBusesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_filtrarBusesActionPerformed
