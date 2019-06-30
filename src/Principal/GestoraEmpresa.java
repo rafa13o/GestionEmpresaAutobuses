@@ -177,6 +177,9 @@ public class GestoraEmpresa {
         return null;
     }
 
+    
+    
+    //MODELOS DE TABLAS
     public Autobus[] getLosAutobuses(String fabricante) {
         ArrayList<Autobus> losBuses = new ArrayList();
         try {
@@ -214,6 +217,45 @@ public class GestoraEmpresa {
 
         }
 
+        return null;
+    }
+    
+    public Cliente[] getLosClientes(){
+        Cliente[] clientes = new Cliente[losClientes.size()];
+        try{
+            for (int i = 0; i<clientes.length; i++){
+                clientes[i]=losClientes.get(i);
+            }
+            return clientes;
+        }catch(NullPointerException err1){
+            
+        }
+        return null;
+    }
+    
+    public Ruta[] getLasRutas(){
+        Ruta[] rutas = new Ruta[lasRutas.size()];
+        try{
+            for(int i = 0; i<rutas.length; i++){
+                rutas[i]=lasRutas.get(i);
+            }
+            return rutas;
+        }catch(NullPointerException err1){
+            
+        }
+        return null;
+    }
+    
+    public Factura[] getLasFacturas(){
+        Factura[] facturas = new Factura[lasFacturas.size()];
+        try{
+            for(int i = 0; i<facturas.length; i++){
+                facturas[i]=lasFacturas.get(i);
+            }
+            return facturas;
+        }catch(NullPointerException err1){
+            
+        }
         return null;
     }
 }
