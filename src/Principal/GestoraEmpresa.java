@@ -187,11 +187,9 @@ public class GestoraEmpresa {
                 if (fabricante == null) {
                     losBuses.add(unAutobus);
                 } else {
-                    int m = 0;
                     String carroceria = unAutobus.getfCarroceria();
                     if (carroceria.equals(fabricante)) {
                         losBuses.add(unAutobus);
-                        m++;
                     }
                 }
             }
