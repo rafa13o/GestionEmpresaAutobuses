@@ -62,7 +62,7 @@ factura y el precio del servicio.
       - Ruta: Registrada previamente en el programa.
       - Precio: 0’20€ por kilómetro recorrido.
       
-Restricciones generales del programa:
+  + Restricciones generales del programa:
       - Todos los datos se almacenarán en archivos.
       - Los datos deberán poderse visualizar en tablas.
       - Los datos de los autobuses deberán poderse filtrar por fabricante de la
