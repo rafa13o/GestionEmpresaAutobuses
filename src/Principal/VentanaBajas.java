@@ -5,7 +5,6 @@
  */
 package Principal;
 
-import ModeloTablas.ModeloAutobuses;
 import ModeloTablas.ModeloTrabajador;
 import ModeloTablas.ModeloCliente;
 import ModeloTablas.ModeloRuta;
@@ -15,7 +14,6 @@ import java.awt.Image;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 /**
@@ -25,6 +23,7 @@ import javax.swing.table.TableRowSorter;
 public class VentanaBajas extends javax.swing.JFrame {
 
     GestoraEmpresa laGestora = new GestoraEmpresa();
+    boolean filtrar = false;
 
     /**
      * Creates new form VentanaBajas
@@ -145,6 +144,11 @@ public class VentanaBajas extends javax.swing.JFrame {
         jScrollPane2.setViewportView(t_autobus);
 
         b_bajaAutobus.setText("DAR DE BAJA AUTOBUSES SELECCIONADOS");
+        b_bajaAutobus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_bajaAutobusActionPerformed(evt);
+            }
+        });
 
         cb_fabricanteCarroceria.setModel(new DefaultComboBoxModel(laGestora.getLosFabricantes()));
 
@@ -361,28 +365,35 @@ public class VentanaBajas extends javax.swing.JFrame {
     }//GEN-LAST:event_b_cerrarVentanaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        //TABLA TRABAJADOR
+        //---TABLA TRABAJADOR
         ModeloTrabajador moTrab = new ModeloTrabajador(laGestora.getLosTrabajadores());
         t_trabajador.setModel(moTrab);
-        TableRowSorter<ModeloTrabajador> ordenarTrabajadores = new TableRowSorter<ModeloTrabajador>(moTrab);
+        TableRowSorter<ModeloTrabajador> ordenarTrabajadores = new TableRowSorter(moTrab);
         t_trabajador.setRowSorter(ordenarTrabajadores);
-        //TABLA AUTOBUSES
+        
+        //---TABLA AUTOBUSES
         ModeloAutobuses moAuto = new ModeloAutobuses(laGestora.getLosAutobuses(null));
         t_autobus.setModel(moAuto);
-        TableRowSorter<ModeloAutobuses> ordenarBuses= new TableRowSorter<ModeloAutobuses>(moAuto);
-        t_autobus.setRowSorter(ordenarBuses);
-        //TABLA CLIENTES
+        /*TableRowSorter<ModeloAutobuses> ordenarBuses = new TableRowSorter(moAuto);
+        t_autobus.setRowSorter(ordenarBuses);*/
+
+        //---TABLA CLIENTES
         ModeloCliente moCli = new ModeloCliente(laGestora.getLosClientes());
         t_cliente.setModel(moCli);
-                    //falta rowSorter pa ke kede más shulo
-        //TABLA RUTAS
+        TableRowSorter<ModeloCliente> ordenarClientes = new TableRowSorter(moCli);
+        t_cliente.setRowSorter(ordenarClientes);
+        
+        //---TABLA RUTAS
         ModeloRuta moRut = new ModeloRuta(laGestora.getLasRutas());
         t_ruta.setModel(moRut);
-                    //falta rowSorter pa ke kede más shulo
-        //TABLA FACTURAS
+        TableRowSorter<ModeloRuta> ordenarRutas = new TableRowSorter(moRut);
+        t_ruta.setRowSorter(ordenarRutas);
+        
+        //---TABLA FACTURAS
         ModeloFactura moFac = new ModeloFactura(laGestora.getLasFacturas());
         t_factura.setModel(moFac);
-                    //falta rowSorter pa ke kede más shulo
+        TableRowSorter<ModeloFactura> ordenarFacturas = new TableRowSorter(moFac);
+        t_factura.setRowSorter(ordenarFacturas);
     }//GEN-LAST:event_formWindowOpened
 
     private void b_filtrarBusesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_filtrarBusesActionPerformed
@@ -390,6 +401,11 @@ public class VentanaBajas extends javax.swing.JFrame {
         ModeloAutobuses moAuto = new ModeloAutobuses(laGestora.getLosAutobuses(fabricante));
         t_autobus.setModel(moAuto);
     }//GEN-LAST:event_b_filtrarBusesActionPerformed
+
+    private void b_bajaAutobusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_bajaAutobusActionPerformed
+        int seleccionado = t_autobus.getSelectedRow();
+        //COMPLETAR
+    }//GEN-LAST:event_b_bajaAutobusActionPerformed
 
     /**
      * @param args the command line arguments

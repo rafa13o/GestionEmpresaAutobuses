@@ -6,7 +6,7 @@
 package ModeloTablas;
 
 import Principal.Factura;
-import java.util.Date;
+import java.time.LocalDate;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -17,7 +17,7 @@ public class ModeloFactura extends AbstractTableModel{
 
     Factura[] lasFacturas;
     String[] columnas = {"Nº FACTURA", "CLIENTE", "LOCALIDAD", "TELÉFONO", "RUTA", "FECHA DE FACTURA", "PRECIO"};
-    Class[] tipos={Integer.class, String.class, String.class, Integer.class, String.class, Date.class, Integer.class};
+    Class[] tipos={Integer.class, String.class, String.class, Integer.class, String.class, LocalDate.class, Integer.class};
 
     public ModeloFactura(Factura[] lasFacturas) {
         this.lasFacturas = lasFacturas;

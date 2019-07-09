@@ -5,23 +5,23 @@
  */
 package Principal;
 
-import java.util.Date;
-
+import java.time.LocalDate;
 
 /**
  *
  * @author Rafa
  */
 public class Factura {
+
     int nFactura;
     String cliente; //Nombre del cliente
     String localidad; //Localidad del cliente
     int telefono; //Teléfono del cliente
     String ruta; //codRuta solicitada
-    Date fechaFactura; //Fecha en la que se ha creado la factura
-    int precio; //precio = kms * 0.20
+    LocalDate fechaFactura; //Fecha en la que se ha creado la factura
+    double precio; //precio = kms * 0.20
 
-    public Factura(int nFactura, String cliente, String localidad, int telefono, String ruta, Date fechaFactura, int precio) {
+    public Factura(int nFactura, String cliente, String localidad, int telefono, String ruta, LocalDate fechaFactura, double precio) {
         this.nFactura = nFactura;
         this.cliente = cliente;
         this.localidad = localidad;
@@ -71,21 +71,20 @@ public class Factura {
         this.ruta = ruta;
     }
 
-    public Date getFechaFactura() {
+    public LocalDate getFechaFactura() {
         return fechaFactura;
     }
 
-    public void setFechaFactura(Date fechaFactura) {
+    public void setFechaFactura(LocalDate fechaFactura) {
         this.fechaFactura = fechaFactura;
     }
 
-    public int getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(int precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
-    
-    
+
 }

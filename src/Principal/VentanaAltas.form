@@ -434,11 +434,17 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="LIMPIAR"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b_limpiarAutobusActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="b_guardarAutobus">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="GUARDAR"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b_guardarAutobusActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="ct_matricula">
                   <Properties>
@@ -611,11 +617,17 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="LIMPIAR"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b_limpiarClienteActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="b_guardarCliente">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="GUARDAR"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b_guardarClienteActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -637,6 +649,10 @@
                                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
+                                          <Component id="b_ventanaInforRuta" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="1" attributes="0">
                                               <Component id="e_ciudadInicio" min="-2" max="-2" attributes="0"/>
                                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
@@ -647,17 +663,13 @@
                                           </Group>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="jTextField1" max="32767" attributes="0"/>
-                                              <Component id="jTextField2" max="32767" attributes="0"/>
-                                              <Component id="jTextField3" max="32767" attributes="0"/>
+                                              <Component id="ct_inicioRuta" max="32767" attributes="0"/>
+                                              <Component id="ct_finRuta" max="32767" attributes="0"/>
+                                              <Component id="ct_kilometros" max="32767" attributes="0"/>
                                               <Component id="cb_conductorRuta" max="32767" attributes="0"/>
                                               <Component id="cb_autobusRuta" max="32767" attributes="0"/>
                                               <Component id="cb_clienteRuta" min="-2" pref="150" max="-2" attributes="0"/>
                                           </Group>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
-                                          <Component id="b_ventanaInforRuta" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="0" pref="128" max="32767" attributes="0"/>
@@ -679,17 +691,17 @@
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="e_ciudadInicio" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ct_inicioRuta" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ct_finRuta" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ct_kilometros" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -741,6 +753,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="DISTANCIA ENTRE INICIO Y FIN (en km):"/>
                   </Properties>
+                  <AccessibilityProperties>
+                    <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="Los kil&#xf3;metros sin decimales."/>
+                  </AccessibilityProperties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel3">
                   <Properties>
@@ -766,21 +781,21 @@
                     <Property name="text" type="java.lang.String" value="CLIENTE:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField1">
+                <Component class="javax.swing.JTextField" name="ct_inicioRuta">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="0"/>
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField2">
+                <Component class="javax.swing.JTextField" name="ct_finRuta">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="0"/>
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField3">
+                <Component class="javax.swing.JTextField" name="ct_kilometros">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="0"/>
@@ -835,6 +850,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="GUARDAR"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b_guardarRutaActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="b_ventanaInforRuta">
                   <Properties>
@@ -953,11 +971,17 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="LIMPIAR"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b_limpiarFacturaActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="b_guardarFactura">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="GUARDAR"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b_guardarFacturaActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="b_ventanaInforfactura">
                   <Properties>

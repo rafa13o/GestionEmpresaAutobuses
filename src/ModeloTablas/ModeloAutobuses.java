@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ModeloTablas;
+package Principal;
 
 import Principal.Autobus;
 import javax.swing.table.AbstractTableModel;
@@ -38,22 +38,22 @@ public class ModeloAutobuses extends AbstractTableModel {
     }
 
     @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        switch (columnIndex) {
+    public Object getValueAt(int row, int column) {
+        switch (column) {
             case 0:
-                return this.elAutobus[rowIndex].getMatricula();
+                return this.elAutobus[row].getMatricula();
             case 1:
-                return this.elAutobus[rowIndex].getfCarroceria();
+                return this.elAutobus[row].getfCarroceria();
             case 2:
-                return this.elAutobus[rowIndex].getModelo();
+                return this.elAutobus[row].getModelo();
             case 3:
-                return this.elAutobus[rowIndex].getfMotor();
+                return this.elAutobus[row].getfMotor();
             case 4:
-                return this.elAutobus[rowIndex].getCombustible();
+                return this.elAutobus[row].getCombustible();
             case 5:
-                return this.elAutobus[rowIndex].getPax();
+                return this.elAutobus[row].getPax();
             case 6:
-                return this.elAutobus[rowIndex].getPrecioCompra();
+                return this.elAutobus[row].getPrecioCompra();
         }
         return null;
     }

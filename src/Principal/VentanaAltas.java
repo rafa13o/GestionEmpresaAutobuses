@@ -6,11 +6,14 @@
 package Principal;
 
 import java.awt.Component;
+import java.awt.HeadlessException;
 import java.awt.Image;
+import java.util.regex.Pattern;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
@@ -93,9 +96,9 @@ public class VentanaAltas extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        ct_inicioRuta = new javax.swing.JTextField();
+        ct_finRuta = new javax.swing.JTextField();
+        ct_kilometros = new javax.swing.JTextField();
         cb_conductorRuta = new javax.swing.JComboBox<>();
         cb_autobusRuta = new javax.swing.JComboBox<>();
         cb_clienteRuta = new javax.swing.JComboBox<>();
@@ -256,8 +259,18 @@ public class VentanaAltas extends javax.swing.JFrame {
         e_combustible.setText("TIPO DE COMBUSTIBLE:");
 
         b_limpiarAutobus.setText("LIMPIAR");
+        b_limpiarAutobus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_limpiarAutobusActionPerformed(evt);
+            }
+        });
 
         b_guardarAutobus.setText("GUARDAR");
+        b_guardarAutobus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_guardarAutobusActionPerformed(evt);
+            }
+        });
 
         ct_matricula.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -361,8 +374,18 @@ public class VentanaAltas extends javax.swing.JFrame {
         ct_telefonoCliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         b_limpiarCliente.setText("LIMPIAR");
+        b_limpiarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_limpiarClienteActionPerformed(evt);
+            }
+        });
 
         b_guardarCliente.setText("GUARDAR");
+        b_guardarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_guardarClienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout p_clienteLayout = new javax.swing.GroupLayout(p_cliente);
         p_cliente.setLayout(p_clienteLayout);
@@ -429,11 +452,11 @@ public class VentanaAltas extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("CLIENTE:");
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        ct_inicioRuta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        ct_finRuta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        ct_kilometros.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         cb_conductorRuta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cb_conductorRuta.setModel(new DefaultComboBoxModel(laGestora.getLosDNI()));
@@ -447,6 +470,11 @@ public class VentanaAltas extends javax.swing.JFrame {
         b_limpiarRuta.setText("LIMPIAR");
 
         b_guardarRuta.setText("GUARDAR");
+        b_guardarRuta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_guardarRutaActionPerformed(evt);
+            }
+        });
 
         b_ventanaInforRuta.setText("ABRIR VENTANA INFORMACIÓN");
         b_ventanaInforRuta.addActionListener(new java.awt.event.ActionListener() {
@@ -465,6 +493,9 @@ public class VentanaAltas extends javax.swing.JFrame {
                         .addGap(29, 29, 29)
                         .addGroup(p_rutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(p_rutaLayout.createSequentialGroup()
+                                .addGap(163, 163, 163)
+                                .addComponent(b_ventanaInforRuta))
+                            .addGroup(p_rutaLayout.createSequentialGroup()
                                 .addGroup(p_rutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(e_ciudadInicio)
                                     .addComponent(jLabel3)
@@ -474,15 +505,12 @@ public class VentanaAltas extends javax.swing.JFrame {
                                     .addComponent(jLabel1))
                                 .addGap(18, 18, 18)
                                 .addGroup(p_rutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField1)
-                                    .addComponent(jTextField2)
-                                    .addComponent(jTextField3)
+                                    .addComponent(ct_inicioRuta)
+                                    .addComponent(ct_finRuta)
+                                    .addComponent(ct_kilometros)
                                     .addComponent(cb_conductorRuta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(cb_autobusRuta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cb_clienteRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(p_rutaLayout.createSequentialGroup()
-                                .addGap(163, 163, 163)
-                                .addComponent(b_ventanaInforRuta)))
+                                    .addComponent(cb_clienteRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 128, Short.MAX_VALUE))
                     .addGroup(p_rutaLayout.createSequentialGroup()
                         .addContainerGap()
@@ -497,15 +525,15 @@ public class VentanaAltas extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(p_rutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(e_ciudadInicio)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ct_inicioRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(p_rutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ct_finRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(p_rutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ct_kilometros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(p_rutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -526,6 +554,8 @@ public class VentanaAltas extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
+        jLabel2.getAccessibleContext().setAccessibleDescription("Los kilómetros sin decimales.");
+
         jTabbedPane7.addTab("-- RUTA --", p_ruta);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -541,8 +571,18 @@ public class VentanaAltas extends javax.swing.JFrame {
         cb_rutaFactura.setModel(new DefaultComboBoxModel(laGestora.getLosCodRutas()));
 
         b_limpiarFactura.setText("LIMPIAR");
+        b_limpiarFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_limpiarFacturaActionPerformed(evt);
+            }
+        });
 
         b_guardarFactura.setText("GUARDAR");
+        b_guardarFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_guardarFacturaActionPerformed(evt);
+            }
+        });
 
         b_ventanaInforfactura.setText("ABRIR VENTANA INFORMACIÓN");
         b_ventanaInforfactura.addActionListener(new java.awt.event.ActionListener() {
@@ -651,11 +691,171 @@ public class VentanaAltas extends javax.swing.JFrame {
     }//GEN-LAST:event_b_menuActionPerformed
 
     private void b_limpiarTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_limpiarTrabajadorActionPerformed
-        limpiarTrabajador();
+        limpiar(p_trabajador);
     }//GEN-LAST:event_b_limpiarTrabajadorActionPerformed
 
-    private void limpiarTrabajador() {
-        Component[] losComponentes = p_trabajador.getComponents();
+    private void b_guardarTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_guardarTrabajadorActionPerformed
+        guardarTrabajador();
+    }//GEN-LAST:event_b_guardarTrabajadorActionPerformed
+
+    private void b_ventanaInforRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_ventanaInforRutaActionPerformed
+        abrirVentanaInformacion();
+    }//GEN-LAST:event_b_ventanaInforRutaActionPerformed
+
+    private void b_ventanaInforfacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_ventanaInforfacturaActionPerformed
+        abrirVentanaInformacion();
+    }//GEN-LAST:event_b_ventanaInforfacturaActionPerformed
+
+    private void b_limpiarAutobusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_limpiarAutobusActionPerformed
+        limpiar(p_autobus);
+    }//GEN-LAST:event_b_limpiarAutobusActionPerformed
+
+    private void b_guardarAutobusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_guardarAutobusActionPerformed
+        guardarAutobus();
+    }//GEN-LAST:event_b_guardarAutobusActionPerformed
+
+    private void b_limpiarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_limpiarClienteActionPerformed
+        limpiar(p_cliente);
+    }//GEN-LAST:event_b_limpiarClienteActionPerformed
+
+    private void b_guardarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_guardarClienteActionPerformed
+        guardarCliente();
+    }//GEN-LAST:event_b_guardarClienteActionPerformed
+
+    private void b_guardarRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_guardarRutaActionPerformed
+        guardarRuta();
+    }//GEN-LAST:event_b_guardarRutaActionPerformed
+
+    private void b_limpiarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_limpiarFacturaActionPerformed
+        limpiar(p_factura);
+    }//GEN-LAST:event_b_limpiarFacturaActionPerformed
+
+    private void b_guardarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_guardarFacturaActionPerformed
+        guardarFactura();
+    }//GEN-LAST:event_b_guardarFacturaActionPerformed
+
+    private void guardarTrabajador() throws HeadlessException {
+        try {
+            String dni = (ct_dni.getText()).toUpperCase();
+            String nombre = (ct_nombreTrabajador.getText()).toUpperCase();
+            String apellido = (ct_apellidosTrabajador.getText()).toUpperCase();
+            String nomApe = apellido + ", " + nombre;
+            int anio = Integer.parseInt(ct_anioIngreso.getText());
+            String seccion = cb_seccion.getItemAt(cb_seccion.getSelectedIndex());
+            if (Pattern.matches("[0-9]{8}[A-Z]{1}", dni)) {
+                if ((laGestora.nuevoTrabajador(dni, nomApe, anio, seccion)) == true) {
+                    limpiar(p_trabajador);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "El número de DNI introducido no es correcto.\n"
+                        + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 1);
+            }
+
+        } catch (NumberFormatException exNumero) {
+            JOptionPane.showMessageDialog(null, "El año introducido no es correcto.\n"
+                    + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 1);
+        }
+    }
+
+    private void guardarAutobus() throws HeadlessException {
+        try {
+            String matricula = (ct_matricula.getText()).toUpperCase();
+            String fabricante = (ct_fabricante.getText()).toUpperCase();
+            String modelo = (ct_modelo.getText()).toUpperCase();
+            String motor = (ct_motor.getText()).toUpperCase();
+            String combustible = cb_combustible.getItemAt(cb_combustible.getSelectedIndex()).toUpperCase();
+            int plazas = Integer.parseInt(ct_plazas.getText());
+            int precio = Integer.parseInt(ct_precio.getText());
+            if (plazas >= 10 && plazas <= 70) {
+                if (precio >= 20000) {
+                    if (laGestora.nuevoAutobus(matricula, fabricante, modelo, motor, combustible, plazas, precio) == true) {
+                        limpiar(p_autobus);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "El precio no puede ser menor de 20.000.\n"
+                            + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 1);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "El número de plazas no puede ser menor de 10 ni exceder de 70.\n"
+                        + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 1);
+            }
+        } catch (NumberFormatException exNumero) {
+            JOptionPane.showMessageDialog(null, "Existen datos incorrectos.\n"
+                    + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 1);
+        }
+    }
+
+    private void guardarRuta() {
+        String inicio = (ct_inicioRuta.getText()).toUpperCase();
+        String destino = (ct_finRuta.getText()).toUpperCase();
+        String kilometros = (ct_kilometros.getText());
+        String conductor = cb_conductorRuta.getItemAt(cb_conductorRuta.getSelectedIndex());
+        String autobus = cb_autobusRuta.getItemAt(cb_autobusRuta.getSelectedIndex());
+        String cliente = cb_clienteRuta.getItemAt(cb_clienteRuta.getSelectedIndex());
+        if (Pattern.matches("[0-9]+", kilometros) == true) {
+            String cod = null;
+            try {
+                cod = generarCodigoRuta(inicio, destino, kilometros);
+            } catch (Exception ex1) {
+                JOptionPane.showMessageDialog(null, "Los datos introducidos son incorrectos.\n"
+                        + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 1);
+            }
+            int distancia = Integer.parseInt(kilometros);
+            if (cod != null) {
+                laGestora.nuevaRuta(cod, inicio, destino, distancia, conductor, autobus, cliente);
+                limpiar(p_ruta);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Los kilómetros introducidos no son correctos.\n"
+                    + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 1);
+        }
+    }
+
+    private void guardarCliente() throws NumberFormatException, HeadlessException {
+        String nombre = (ct_nombreCliente.getText()).toUpperCase();
+        String localidad = (ct_localidadCliente.getText()).toUpperCase();
+        String tele = (ct_telefonoCliente.getText());
+        if (tele.length() == 9) {
+            int telefono = Integer.parseInt(tele);
+            String letras = nombre.substring(0, 3);
+            int numero = (int) (Math.random() * 1000);
+            String codCliente = letras + numero;
+            if (laGestora.nuevoCliente(codCliente, nombre, localidad, telefono) == true) {
+                limpiar(p_cliente);
+            } else {
+                guardarCliente();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "El teléfono introducido no es correcto.\n"
+                    + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 1);
+        }
+    }
+
+    private void guardarFactura() {
+        String cliente = cb_clienteFactura.getItemAt(cb_clienteFactura.getSelectedIndex());
+        String ruta = cb_rutaFactura.getItemAt(cb_rutaFactura.getSelectedIndex());
+        laGestora.nuevaFactura(cliente, ruta);
+    }
+
+    private String generarCodigoRuta(String inicio, String fin, String kilometros) {
+        while (kilometros.length() < 5) {
+            kilometros = 0 + kilometros;
+        }
+        String letraInicio = inicio.substring(0, 1);
+        String letraFin = fin.substring(0, 1);
+        String codigoRuta = letraInicio + letraFin + kilometros;
+        System.out.println(codigoRuta);
+        return codigoRuta;
+    }
+
+    private void abrirVentanaInformacion() {
+        VentanaBajas lasBajas = new VentanaBajas();
+        lasBajas.setVisible(true);
+        lasBajas.mostrarBotonCerrarVentana(true);
+    }
+
+    private void limpiar(JPanel elPanel) {
+        Component[] losComponentes = elPanel.getComponents();
         for (Component elComponente : losComponentes) {
             if (elComponente instanceof JTextField) {
                 JTextField ct = (JTextField) elComponente;
@@ -668,36 +868,6 @@ public class VentanaAltas extends javax.swing.JFrame {
         }
     }
 
-    private void b_guardarTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_guardarTrabajadorActionPerformed
-        try {
-            String dni = (ct_dni.getText()).toUpperCase();
-            String nombre = (ct_nombreTrabajador.getText()).toUpperCase();
-            String apellido = (ct_apellidosTrabajador.getText()).toUpperCase();
-            String nomApe = apellido + ", " + nombre;
-            int anio = Integer.parseInt(ct_anioIngreso.getText());
-            String seccion = cb_seccion.getItemAt(cb_seccion.getSelectedIndex());
-            if((laGestora.nuevoTrabajador(dni, nomApe, anio, seccion))==true){
-                limpiarTrabajador();
-            }
-        } catch (NumberFormatException exNumero) {
-            JOptionPane.showMessageDialog(null, "La año introducido no es correcto.\n"
-                    + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 1);
-        }
-    }//GEN-LAST:event_b_guardarTrabajadorActionPerformed
-
-    private void b_ventanaInforRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_ventanaInforRutaActionPerformed
-        abrirVentanaInformacion();
-    }//GEN-LAST:event_b_ventanaInforRutaActionPerformed
-
-    private void b_ventanaInforfacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_ventanaInforfacturaActionPerformed
-        abrirVentanaInformacion();
-    }//GEN-LAST:event_b_ventanaInforfacturaActionPerformed
-
-    private void abrirVentanaInformacion(){
-        VentanaBajas lasBajas = new VentanaBajas();
-        lasBajas.setVisible(true);
-        lasBajas.mostrarBotonCerrarVentana(true);
-    }
     /**
      * @param args the command line arguments
      */
@@ -759,6 +929,9 @@ public class VentanaAltas extends javax.swing.JFrame {
     private javax.swing.JTextField ct_apellidosTrabajador;
     private javax.swing.JTextField ct_dni;
     private javax.swing.JTextField ct_fabricante;
+    private javax.swing.JTextField ct_finRuta;
+    private javax.swing.JTextField ct_inicioRuta;
+    private javax.swing.JTextField ct_kilometros;
     private javax.swing.JTextField ct_localidadCliente;
     private javax.swing.JTextField ct_matricula;
     private javax.swing.JTextField ct_modelo;
@@ -793,9 +966,6 @@ public class VentanaAltas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JTabbedPane jTabbedPane7;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JPanel p_autobus;
     private javax.swing.JPanel p_cliente;
     private javax.swing.JPanel p_factura;

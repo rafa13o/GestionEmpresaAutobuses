@@ -239,6 +239,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="DAR DE BAJA AUTOBUSES SELECCIONADOS"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b_bajaAutobusActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="cb_fabricanteCarroceria">
                   <Properties>
