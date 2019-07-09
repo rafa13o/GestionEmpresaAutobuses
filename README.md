@@ -6,7 +6,7 @@ Programa que gestiona una empresa dedicada al transporte de pasajeros por carret
 Se requiere hacer una aplicación que gestione, a través de una ventana, los
 siguientes aspectos de una empresa de autobuses privada con sus restricciones
 pertinentes.
-  + Trabajadores:
+  + TRABAJADORES:
     Un trabajador se definirá por el DNI, su nombre, sus dos apellidos, la
 sección en la que trabaja y el año de ingreso a la empresa.
     Restricciones:
@@ -14,7 +14,7 @@ sección en la que trabaja y el año de ingreso a la empresa.
       - Año de ingreso: El año de ingreso no será superior al actual.
       - Secciones: Mantenimiento, conductores, dirección.
       - No puede haber dos trabajadores con el mismo DNI.
-  + Autobuses
+  + AUTOBUSES:
     Un autobús estará definido por su matrícula, el fabricante de la
 carrocería, el modelo, el fabricante del motor, el número de plazas, el precio de compra y su
 tipo de combustible.
@@ -30,7 +30,7 @@ autobús.
             (Por ejemplo:
                   Fabricante carrocería: Irizar
                   Modelo: i6s)
-  + Rutas
+  + RUTAS:
     Las rutas estarán definidas por un código de ruta, la ciudad de inicio,
 la ciudad de fin, los kilómetros recorridos, el conductor que realizará la ruta, el autobús que
 se utilizará y el cliente que lo ha solicitado.
@@ -44,7 +44,7 @@ características cambia.
       - Conductor: El conductor será un DNI previamente registrado.
       - Autobús: El autobús será una matrícula registrada.
       - Cliente: El cliente será el nombre de uno ya registrado.
-  + Clientes
+  + CLIENTES:
     Los clientes estarán definidos por un código de cliente, el nombre, la
 localidad y el teléfono de contacto.
     Restricciones:
@@ -52,7 +52,7 @@ localidad y el teléfono de contacto.
 nombre y 3 dígitos numéricos aleatorios. El código lo debe generar el propio programa, y no
 deberá repetirse.
       - Teléfono: El teléfono tendrá una extensión de 9 dígitos.
-  + Facturas
+  + FACTURAS:
     Las facturas se definirán mediante un número de factura, el nombre
 del cliente, la localidad del cliente, el teléfono del cliente, la ruta solicitada, la fecha de la
 factura y el precio del servicio.
@@ -62,7 +62,7 @@ factura y el precio del servicio.
       - Ruta: Registrada previamente en el programa.
       - Precio: 0’20€ por kilómetro recorrido.
       
-Restricciones generales del programa:
+  + RESTRICCIONES GENERALES DEL PROGRAMA:
       - Todos los datos se almacenarán en archivos.
       - Los datos deberán poderse visualizar en tablas.
       - Los datos de los autobuses deberán poderse filtrar por fabricante de la
