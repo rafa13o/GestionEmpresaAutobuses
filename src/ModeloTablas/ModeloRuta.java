@@ -12,11 +12,11 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Rafa
  */
-public class ModeloRuta extends AbstractTableModel{
+public class ModeloRuta extends AbstractTableModel {
 
     Ruta[] lasRutas;
-    String[] columnas = {"CÓDIGO DE RUTA", "ORIGEN", "DESTINO", "KMS", "CONDUCTOR", "AUTOBÚS", "CLIENTE"};
-    Class[] tipos= {String.class, String.class, String.class, Integer.class, String.class, String.class, String.class};
+    String[] columnas = {"CÓDIGO DE RUTA", "ORIGEN", "DESTINO", "KMS", "CONDUCTOR", "AUTOBÚS"};
+    Class[] tipos = {String.class, String.class, String.class, Integer.class, String.class, String.class};
 
     public ModeloRuta(Ruta[] lasRutas) {
         this.lasRutas = lasRutas;
@@ -36,7 +36,7 @@ public class ModeloRuta extends AbstractTableModel{
     public String getColumnName(int column) {
         return columnas[column];
     }
-    
+
     @Override
     public int getRowCount() {
         return lasRutas.length;
@@ -49,7 +49,7 @@ public class ModeloRuta extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        switch (columnIndex){
+        switch (columnIndex) {
             case 0:
                 return lasRutas[rowIndex].getCodRuta();
             case 1:
@@ -62,10 +62,8 @@ public class ModeloRuta extends AbstractTableModel{
                 return lasRutas[rowIndex].getConductor();
             case 5:
                 return lasRutas[rowIndex].getAutobus();
-            case 6:
-                return lasRutas[rowIndex].getCliente();
         }
         return null;
     }
-    
+
 }

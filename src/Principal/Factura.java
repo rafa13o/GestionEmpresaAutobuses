@@ -87,4 +87,8 @@ public class Factura {
         this.precio = precio;
     }
 
+    @Override
+    public String toString() {
+        return nFactura + ";" + cliente + ";" + localidad + ";" + telefono + ";" + ruta + ";" + fechaFactura + ";" + precio+"\n";
+    }
 }

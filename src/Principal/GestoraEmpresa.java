@@ -5,10 +5,16 @@
  */
 package Principal;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Arrays;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -35,20 +41,23 @@ public class GestoraEmpresa {
     EnumCombustible[] losCombustibles = EnumCombustible.values();
 
     public GestoraEmpresa() {
-
-        losTrabajadores.add(new Trabajador("12345678J", "TRECENIO RODRIGUEZ, RAFAEL", 2019, "CONDUCTOR"));
-        losTrabajadores.add(new Trabajador("12345678Z", "TRECENIO RODRIGUEZ, RAFAEL", 2016, "DIRECCION"));
-        losAutobuses.add(new Autobus("5188JSG", "IRIZAR", "I6S", "MECEDES-BENZ", "HIBRIDO", 55, 30000));
-        losAutobuses.add(new Autobus("3515BVW", "IRIZAR", "I6", "RENAULT", "GASOLINA", 55, 30000));
-        losAutobuses.add(new Autobus("9876JZP", "AYATS", "ATLANTIS", "SCANIA", "DIESEL", 70, 70000));
-        losClientes.add(new Cliente("RAF123", "RAFAEL", "VALLADOLID", 123654789));
-        losClientes.add(new Cliente("VAC123", "VACCEO CRAFT BEER S.L.", "MADRID", 917654321));
-        lasRutas.add(new Ruta("VM00184", "VALLADOLID", "MADRID", 184, "12345678J", "5188JSG", "VAC123"));
-        lasRutas.add(new Ruta("VP02262", "VALLADOLID", "POTSDAM", 2262, "12345678J", "9876JZP", "RAF123"));
-        LocalDate fecha = LocalDate.of(2019, 07, 10);
-        lasFacturas.add(new Factura(1, "RAFAEL", "VALLADOLID", 123654789, "VM00184", fecha, 36.8));
+        leerArchivos();
+//        losTrabajadores.add(new Trabajador("12345678J", "TRECENIO RODRIGUEZ, RAFAEL", 2019, "CONDUCTOR"));
+//        losTrabajadores.add(new Trabajador("12345678Z", "TRECENIO RODRIGUEZ, RAFAEL", 2016, "DIRECCION"));
+//        losAutobuses.add(new Autobus("5188JSG", "IRIZAR", "I6S", "MECEDES-BENZ", "HIBRIDO", 55, 30000));
+//        losAutobuses.add(new Autobus("3515BVW", "IRIZAR", "I6", "RENAULT", "GASOLINA", 55, 30000));
+//        losAutobuses.add(new Autobus("9876JZP", "AYATS", "ATLANTIS", "SCANIA", "DIESEL", 70, 70000));
+//        losClientes.add(new Cliente("RAF123", "RAFAEL", "VALLADOLID", 123654789));
+//        losClientes.add(new Cliente("VAC123", "VACCEO CRAFT BEER S.L.", "MADRID", 917654321));
+//        lasRutas.add(new Ruta("VM00184", "VALLADOLID", "MADRID", 184, "12345678J", "5188JSG", "VAC123"));
+//        lasRutas.add(new Ruta("VP02262", "VALLADOLID", "POTSDAM", 2262, "12345678J", "9876JZP", "RAF123"));
+//        LocalDate fecha = LocalDate.of(2019, 07, 10);
+//        lasFacturas.add(new Factura(1, "RAFAEL", "VALLADOLID", 123654789, "VM00184", fecha, 36.8));
+//        lasFacturas.add(new Factura(2, "VACCEO CRAFT BEER S.L.", "MADRID", 917654321, "VP02262", fecha, 452.4));
+//        escribirArchivos();
     }
 
+    //GENERAR NUEVOS DATOS******************************************************************************************************
     /**
      * Genera un nuevo trabajador
      *
@@ -62,13 +71,7 @@ public class GestoraEmpresa {
         LocalDate fechaActual = LocalDate.now();
         int anioActual = fechaActual.getYear();
         ArrayList<String> losDni = new ArrayList();
-        try {
-            for (Trabajador unTrabajador : losTrabajadores) {
-                losDni.add(unTrabajador.getDni());
-            }
-        } catch (NullPointerException err1) {
-
-        }
+        losDni.addAll(Arrays.asList(getTodosLosDNI()));
         if (losDni.contains(dni) == false) {
             if (anio <= anioActual) {
                 elTrabajador = new Trabajador(dni, nomApe, anio, seccion);
@@ -154,11 +157,10 @@ public class GestoraEmpresa {
      * @param distancia
      * @param conductor
      * @param autobus
-     * @param cliente
      * @return true si se ha podido crear - false si ha ocurrido algún error
      */
-    public boolean nuevaRuta(String codigo, String inicio, String destino, int distancia, String conductor, String autobus, String cliente) {
-        laRuta = new Ruta(codigo, inicio, destino, distancia, conductor, autobus, cliente);
+    public boolean nuevaRuta(String codigo, String inicio, String destino, int distancia, String conductor, String autobus) {
+        laRuta = new Ruta(codigo, inicio, destino, distancia, conductor, autobus);
         lasRutas.add(laRuta);
         return true;
     }
@@ -183,14 +185,16 @@ public class GestoraEmpresa {
         int lugarClienteEnArray = 0;
         int lugarRutaEnArray = 0;
         String[] clientes = getLosCodClientes();
-        for (int i = 0; i < clientes.length; i++) {
+        System.out.println("coge los codigos de clientes");
+        for (int i = 0; i < clientes.length; i++) {//Recoger código de cliente
             if (clientes[i].equals(cliente)) {
                 lugarClienteEnArray = i;
                 break;
             }
         }
         String[] rutas = getLosCodRutas();
-        for (int i = 0; i < rutas.length; i++) {
+        System.out.println("coge los codigos de las rutas");
+        for (int i = 0; i < rutas.length; i++) {//Recoger código de ruta
             if (rutas[i].equals(ruta)) {
                 lugarRutaEnArray = i;
                 break;
@@ -205,9 +209,11 @@ public class GestoraEmpresa {
         laFactura = new Factura(nFactura, clienteFactura.getNombre(),
                 clienteFactura.getLocalidad(), clienteFactura.getTelefono(),
                 rutaFactura.getCodRuta(), fechaFactura, precioFinal);
+        lasFacturas.add(laFactura);
         return true;
     }
 
+    //OBTENCIÓN DE DATOS********************************************************************************************************
     /**
      * Crea un array con las secciones del enum secciones para utilizarlo en el
      * ComboBox de las secciones a la hora de añadir un nuevo trabajador
@@ -242,11 +248,11 @@ public class GestoraEmpresa {
      *
      * @return DNI
      */
-    public String[] getLosDNI() {
+    public String[] getLosDNIdeConductores() {
         ArrayList<String> dniConductores = new ArrayList();
         try {
             for (Trabajador unTrabajador : losTrabajadores) {
-                if ((unTrabajador.getSeccion()).equals("CONDUCTOR")) {
+                if ((unTrabajador.getSeccion()).equalsIgnoreCase("CONDUCTOR")) {
                     dniConductores.add(unTrabajador.getDni());
                 }
             }
@@ -255,6 +261,23 @@ public class GestoraEmpresa {
                 dni[i] = dniConductores.get(i);
             }
             return dni;
+        } catch (NullPointerException err1) {
+
+        }
+        return null;
+    }
+
+    public String[] getTodosLosDNI() {
+        ArrayList<String> losDni = new ArrayList();
+        try {
+            for (Trabajador unTrabajador : losTrabajadores) {
+                losDni.add(unTrabajador.getDni());
+            }
+            String[] dnis = new String[losDni.size()];
+            for (int i = 0; i < dnis.length; i++) {
+                dnis[i] = losDni.get(i);
+            }
+            return dnis;
         } catch (NullPointerException err1) {
 
         }
@@ -338,12 +361,14 @@ public class GestoraEmpresa {
     public String[] getLosFabricantes() {
         ArrayList<String> losFabricantes = new ArrayList();
         try {
+            losFabricantes.add("TODOS");
             for (Autobus unAutobus : losAutobuses) {
                 String fCarroceria = unAutobus.getfCarroceria();
                 if (losFabricantes.contains(fCarroceria) == false) {
                     losFabricantes.add(unAutobus.getfCarroceria());
                 }
             }
+
             String[] fabricantes = new String[losFabricantes.size()];
             for (int i = 0; i < fabricantes.length; i++) {
                 fabricantes[i] = losFabricantes.get(i);
@@ -355,12 +380,73 @@ public class GestoraEmpresa {
         return null;
     }
 
-    //MODELOS DE TABLAS
+    //ELIMINACIÓN DE DATOS*******************************************************************************************************
+    public boolean borrarTrabajador(String[] dni) {
+        try {
+            ArrayList<Integer> lugarEnArray = new ArrayList();
+            ArrayList<Trabajador> todosLosTrabajadores = new ArrayList();
+            ArrayList<String> todosLosDNI = new ArrayList();
+
+            todosLosDNI.addAll(Arrays.asList(getTodosLosDNI()));
+            for (Trabajador trabajador : losTrabajadores) {//Hago una copia del arrayList losTrabajadores
+                todosLosTrabajadores.add(trabajador);
+            }
+            for (String dni1 : dni) {//Relleno un arrayList sólo con los DNI
+                if (todosLosDNI.contains(dni1)) {
+                    int lugar = todosLosDNI.indexOf(dni1);
+                    lugarEnArray.add(lugar);
+                }
+            }
+
+            losTrabajadores.clear();
+            for (int rm = 0; rm < todosLosTrabajadores.size(); rm++) {
+                if (lugarEnArray.contains(rm) == false) {
+                    losTrabajadores.add(todosLosTrabajadores.get(rm));
+                }
+            }
+            return true;
+        } catch (NullPointerException err1) {
+
+        }
+
+        return false;
+    }
+
+    public boolean borrarAutobus(String[] matricula) {
+        try {
+            ArrayList<Autobus> todosLosAutobuses = new ArrayList();
+            ArrayList<String> todasLasMatriculas = new ArrayList();
+            ArrayList<Integer> lugarEnArray = new ArrayList();
+            todasLasMatriculas.addAll(Arrays.asList(getLasMatriculas()));
+            for (Autobus autobus : losAutobuses) {//Hago una copia del arrayList losAutobuses
+                todosLosAutobuses.add(autobus);
+            }
+            for (String matricula1 : matricula) {//Relleno un arrayList sólo con las matrículas
+                if (todasLasMatriculas.contains(matricula1)) {
+                    int lugar = todasLasMatriculas.indexOf(matricula1);
+                    lugarEnArray.add(lugar);
+                }
+            }
+
+            losAutobuses.clear();
+            for (int rm = 0; rm < todosLosAutobuses.size(); rm++) {
+                if (lugarEnArray.contains(rm) == false) {
+                    losAutobuses.add(todosLosAutobuses.get(rm));
+                }
+            }
+            return true;
+        } catch (NullPointerException err1) {
+
+        }
+        return false;
+    }
+
+    //MODELOS DE TABLAS**********************************************************************************************************
     public Autobus[] getLosAutobuses(String fabricante) {
         ArrayList<Autobus> losBuses = new ArrayList();
         try {
             for (Autobus unAutobus : losAutobuses) {
-                if (fabricante == null) {
+                if (fabricante.equalsIgnoreCase("TODOS")) {
                     losBuses.add(unAutobus);
                 } else {
                     String carroceria = unAutobus.getfCarroceria();
@@ -431,5 +517,125 @@ public class GestoraEmpresa {
 
         }
         return null;
+    }
+
+    //LECTURA Y ESCRITURA DE DATOS***********************************************************************************************
+    public boolean leerArchivos() {
+        try {
+            BufferedReader archivoTrabajadores = new BufferedReader(new FileReader("trabajadores.csv"));
+            BufferedReader archivoAutobuses = new BufferedReader(new FileReader("autobuses.csv"));
+            BufferedReader archivoClientes = new BufferedReader(new FileReader("clientes.csv"));
+            BufferedReader archivoRutas = new BufferedReader(new FileReader("rutas.csv"));
+            BufferedReader archivoFacturas = new BufferedReader(new FileReader("facturas.csv"));
+            BufferedReader[] archivosParaLeer = {archivoTrabajadores, archivoAutobuses, archivoClientes, archivoRutas, archivoFacturas};
+
+            for (int i = 0; i < archivosParaLeer.length; i++) {
+                ArrayList listadoLeer = new ArrayList();
+                String[] datos;
+                String lineaLeida = archivosParaLeer[i].readLine();
+                while (lineaLeida != null) {
+                    listadoLeer.add(lineaLeida);
+                    lineaLeida = archivosParaLeer[i].readLine();
+                }
+                for (int n = 0; n < listadoLeer.size(); n++) {
+                    datos = String.valueOf(listadoLeer.get(n)).split(";");
+                    switch (i) {
+                        case 0://Trabajador
+                            elTrabajador = new Trabajador(datos[0], datos[1], Integer.parseInt(datos[2]), datos[3]);
+                            losTrabajadores.add(elTrabajador);
+                            break;
+                        case 1://Autobús
+                            elAutobus = new Autobus(datos[0], datos[1], datos[2], datos[3], datos[4], Integer.parseInt(datos[5]), Integer.parseInt(datos[6]));
+                            losAutobuses.add(elAutobus);
+                            break;
+                        case 2://Cliente
+                            elCliente = new Cliente(datos[0], datos[1], datos[2], Integer.parseInt(datos[3]));
+                            losClientes.add(elCliente);
+                            break;
+                        case 3://Ruta
+                            laRuta = new Ruta(datos[0], datos[1], datos[2], Integer.parseInt(datos[3]), datos[4], datos[5]);
+                            lasRutas.add(laRuta);
+                            break;
+                        case 4://Factura
+                            laFactura = new Factura(Integer.parseInt(datos[0]), datos[1], datos[2], Integer.parseInt(datos[3]), datos[4], LocalDate.parse(datos[5]), Double.parseDouble(datos[6]));
+                            lasFacturas.add(laFactura);
+                            break;
+                    }
+                }
+                archivosParaLeer[i].close();
+
+            }
+            getLosTrabajadores();
+            getLosAutobuses(null);
+            getLosClientes();
+            getLasRutas();
+            getLasFacturas();
+            return true;
+        } catch (FileNotFoundException exFile) {
+
+        } catch (IOException exIO) {
+
+        }
+        return false;
+    }
+
+    public boolean escribirArchivos() {
+        try {
+            BufferedWriter archivoTrabajadores = new BufferedWriter(new FileWriter("trabajadores.csv"));
+            BufferedWriter archivoAutobuses = new BufferedWriter(new FileWriter("autobuses.csv"));
+            BufferedWriter archivoClientes = new BufferedWriter(new FileWriter("clientes.csv"));
+            BufferedWriter archivoRutas = new BufferedWriter(new FileWriter("rutas.csv"));
+            BufferedWriter archivoFacturas = new BufferedWriter(new FileWriter("facturas.csv"));
+            BufferedWriter[] archivosParaEscribir = {archivoTrabajadores, archivoAutobuses, archivoClientes, archivoRutas, archivoFacturas};
+
+            for (int i = 0; i < archivosParaEscribir.length; i++) {
+                switch (i) {
+                    case 0://Trabajador
+                        for (Trabajador unTrabajador : losTrabajadores) {
+                            archivosParaEscribir[i].write(unTrabajador.toString());
+                        }
+                        break;
+                    case 1://Autobus
+                        for (Autobus unAutobus : losAutobuses) {
+                            archivosParaEscribir[i].write(unAutobus.toString());
+                        }
+                        break;
+                    case 2://Cliente
+                        for (Cliente unCliente : losClientes) {
+                            archivosParaEscribir[i].write(unCliente.toString());
+                        }
+                        break;
+                    case 3://Ruta
+                        for (Ruta unaRuta : lasRutas) {
+                            archivosParaEscribir[i].write(unaRuta.toString());
+                        }
+                        break;
+                    case 4://Factura
+                        for (Factura unaFactura : lasFacturas) {
+                            archivosParaEscribir[i].write(unaFactura.toString());
+                        }
+                        archivoFacturas.close();
+                        break;
+                }
+                archivosParaEscribir[i].close();
+            }
+            return true;
+
+        } catch (FileNotFoundException exFile) {
+
+        } catch (IOException exIO) {
+
+        }
+        return false;
+    }
+
+    //COTEJAMIENTO DE DATOS*****************************************************************************************************
+    public boolean comprobarMatricula(String matricula) {
+        if (Pattern.matches("[0-9]{4}[BCDFGHJKLMNPQRSTVWXYZ]{3}", matricula)) {
+            return true;
+        } else if (Pattern.matches("[A-Z]{1,2}[0-9]{4}[A-Z]{2}", matricula)) {
+            return true;
+        }
+        return false;
     }
 }

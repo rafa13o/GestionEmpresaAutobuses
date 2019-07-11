@@ -83,6 +83,11 @@ public class Autobus {
     public void setCombustible(String combustible) {
         this.combustible = combustible;
     }
+
+    @Override
+    public String toString() {
+        return matricula + ";" + fCarroceria + ";" + modelo + ";" + fMotor + ";" + combustible + ";" + pax + ";" + precioCompra+"\n";
+    }
     
     
 }

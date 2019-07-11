@@ -15,6 +15,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableRowSorter;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -30,6 +32,7 @@ public class VentanaBajas extends javax.swing.JFrame {
      */
     public VentanaBajas() {
         initComponents();
+
         try {
             Image icono = new ImageIcon("src/Imagenes/favicon.png").getImage();
             setIconImage(icono);
@@ -108,6 +111,11 @@ public class VentanaBajas extends javax.swing.JFrame {
         jScrollPane1.setViewportView(t_trabajador);
 
         b_bajaTrabajador.setText("DAR DE BAJA TRABAJADORES SELECCIONADOS");
+        b_bajaTrabajador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_bajaTrabajadorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout p_trabajadorLayout = new javax.swing.GroupLayout(p_trabajador);
         p_trabajador.setLayout(p_trabajadorLayout);
@@ -350,7 +358,7 @@ public class VentanaBajas extends javax.swing.JFrame {
 
     private void b_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_salirActionPerformed
         this.setVisible(false);
-        JOptionPane.showMessageDialog(null, "GRACIAS. HASTA PRONTO.", "GESTIÓN DE EMPRESA ©", 1);
+        JOptionPane.showMessageDialog(null, "GRACIAS. HASTA PRONTO.", "GESTIÓN DE EMPRESA ©", -1);
         System.exit(0);
     }//GEN-LAST:event_b_salirActionPerformed
 
@@ -370,9 +378,9 @@ public class VentanaBajas extends javax.swing.JFrame {
         t_trabajador.setModel(moTrab);
         TableRowSorter<ModeloTrabajador> ordenarTrabajadores = new TableRowSorter(moTrab);
         t_trabajador.setRowSorter(ordenarTrabajadores);
-        
+
         //---TABLA AUTOBUSES
-        ModeloAutobuses moAuto = new ModeloAutobuses(laGestora.getLosAutobuses(null));
+        ModeloAutobuses moAuto = new ModeloAutobuses(laGestora.getLosAutobuses("TODOS"));
         t_autobus.setModel(moAuto);
         /*TableRowSorter<ModeloAutobuses> ordenarBuses = new TableRowSorter(moAuto);
         t_autobus.setRowSorter(ordenarBuses);*/
@@ -382,13 +390,13 @@ public class VentanaBajas extends javax.swing.JFrame {
         t_cliente.setModel(moCli);
         TableRowSorter<ModeloCliente> ordenarClientes = new TableRowSorter(moCli);
         t_cliente.setRowSorter(ordenarClientes);
-        
+
         //---TABLA RUTAS
         ModeloRuta moRut = new ModeloRuta(laGestora.getLasRutas());
         t_ruta.setModel(moRut);
         TableRowSorter<ModeloRuta> ordenarRutas = new TableRowSorter(moRut);
         t_ruta.setRowSorter(ordenarRutas);
-        
+
         //---TABLA FACTURAS
         ModeloFactura moFac = new ModeloFactura(laGestora.getLasFacturas());
         t_factura.setModel(moFac);
@@ -403,9 +411,75 @@ public class VentanaBajas extends javax.swing.JFrame {
     }//GEN-LAST:event_b_filtrarBusesActionPerformed
 
     private void b_bajaAutobusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_bajaAutobusActionPerformed
-        int seleccionado = t_autobus.getSelectedRow();
-        //COMPLETAR
+        try {
+            ArrayList<String> matriculaSeleccionada = new ArrayList();
+            int[] fila = t_autobus.getSelectedRows();
+            for (int i = 0; i < fila.length; i++) {
+                Object seleccionado = t_autobus.getValueAt(fila[i], 0);
+                matriculaSeleccionada.add(seleccionado.toString());
+            }
+
+            String[] autobusSeleccionado = new String[matriculaSeleccionada.size()];
+            for (int i = 0; i < autobusSeleccionado.length; i++) {
+                autobusSeleccionado[i] = matriculaSeleccionada.get(i);
+            }
+            if (laGestora.borrarAutobus(autobusSeleccionado) == true) {
+                if(autobusSeleccionado.length==1){
+                    JOptionPane.showMessageDialog(null, "El autobús se ha dado de baja con éxito.", "Resultado - GESTIÓN DE EMPRESA ©", 1);
+                ejecutarAlBorrarDatos();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Los autobuses se han dado de baja con éxito.", "Resultado - GESTIÓN DE EMPRESA ©", 1);
+                ejecutarAlBorrarDatos();
+                }
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha podido dar de baja ningún autobús.\n"
+                        + "Por favor, compruebe que ha seleccionado uno e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
+
+            }
+        } catch (ArrayIndexOutOfBoundsException ex1) {
+            JOptionPane.showMessageDialog(null, "No se ha podido dar de baja ningún autobús.\n"
+                    + "Por favor, compruebe que ha seleccionado uno e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
+        }
     }//GEN-LAST:event_b_bajaAutobusActionPerformed
+
+    private void b_bajaTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_bajaTrabajadorActionPerformed
+        try {
+            ArrayList<String> dniSeleccionado = new ArrayList();
+            int[] filas = t_trabajador.getSelectedRows();
+            for (int i = 0; i < filas.length; i++) {
+                Object seleccionado = t_trabajador.getValueAt(filas[i], 0);
+                dniSeleccionado.add(seleccionado.toString());
+            }
+            String[] trabajadorSeleccionado = new String[dniSeleccionado.size()];
+            for (int i = 0; i < dniSeleccionado.size(); i++) {
+                trabajadorSeleccionado[i] = dniSeleccionado.get(i);
+                System.out.println(Arrays.toString(trabajadorSeleccionado));
+            }
+            if (laGestora.borrarTrabajador(trabajadorSeleccionado)) {
+                if (trabajadorSeleccionado.length == 1) {
+                    JOptionPane.showMessageDialog(null, "El trabajador se ha dado de baja con éxito.", "Resultado - GESTIÓN DE EMPRESA ©", 1);
+                    ejecutarAlBorrarDatos();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Los trabajadores se han dado de baja con éxito.", "Resultado - GESTIÓN DE EMPRESA ©", 1);
+                    ejecutarAlBorrarDatos();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha podido dar de baja a ningún trabajador.\n"
+                        + "Por favor, compruebe que ha seleccionado al menos uno e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
+            }
+        } catch (ArrayIndexOutOfBoundsException ex1) {
+            JOptionPane.showMessageDialog(null, "No se ha podido dar de baja a ningún trabajador33.\n"
+                    + "Por favor, compruebe que ha seleccionado al menos uno e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
+//        } catch (IndexOutOfBoundsException ex2) {
+//            JOptionPane.showMessageDialog(null, "No se ha podido dar de baja a ningún trabajador44.\n"
+//                    + "Por favor, compruebe que ha seleccionado al menos uno e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
+        }
+    }//GEN-LAST:event_b_bajaTrabajadorActionPerformed
+
+    private void ejecutarAlBorrarDatos() {
+        laGestora.escribirArchivos();
+    }
 
     /**
      * @param args the command line arguments

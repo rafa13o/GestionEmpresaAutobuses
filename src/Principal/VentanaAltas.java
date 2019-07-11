@@ -95,13 +95,11 @@ public class VentanaAltas extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         ct_inicioRuta = new javax.swing.JTextField();
         ct_finRuta = new javax.swing.JTextField();
         ct_kilometros = new javax.swing.JTextField();
         cb_conductorRuta = new javax.swing.JComboBox<>();
         cb_autobusRuta = new javax.swing.JComboBox<>();
-        cb_clienteRuta = new javax.swing.JComboBox<>();
         b_limpiarRuta = new javax.swing.JButton();
         b_guardarRuta = new javax.swing.JButton();
         b_ventanaInforRuta = new javax.swing.JButton();
@@ -392,17 +390,23 @@ public class VentanaAltas extends javax.swing.JFrame {
         p_clienteLayout.setHorizontalGroup(
             p_clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(p_clienteLayout.createSequentialGroup()
-                .addGap(164, 164, 164)
-                .addGroup(p_clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(e_localidadCliente)
-                    .addComponent(e_nombreCliente)
-                    .addComponent(e_telefonoCliente))
-                .addGap(37, 37, 37)
+                .addGap(43, 43, 43)
                 .addGroup(p_clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ct_nombreCliente)
-                    .addComponent(ct_localidadCliente)
-                    .addComponent(ct_telefonoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                .addContainerGap(157, Short.MAX_VALUE))
+                    .addGroup(p_clienteLayout.createSequentialGroup()
+                        .addComponent(e_nombreCliente)
+                        .addGap(18, 18, 18)
+                        .addComponent(ct_nombreCliente))
+                    .addGroup(p_clienteLayout.createSequentialGroup()
+                        .addGroup(p_clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(e_localidadCliente)
+                            .addComponent(e_telefonoCliente))
+                        .addGap(18, 18, 18)
+                        .addGroup(p_clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ct_localidadCliente)
+                            .addGroup(p_clienteLayout.createSequentialGroup()
+                                .addComponent(ct_telefonoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 212, Short.MAX_VALUE)))))
+                .addContainerGap(85, Short.MAX_VALUE))
             .addGroup(p_clienteLayout.createSequentialGroup()
                 .addGap(56, 56, 56)
                 .addComponent(b_limpiarCliente)
@@ -449,9 +453,6 @@ public class VentanaAltas extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("AUTOBÚS:");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("CLIENTE:");
-
         ct_inicioRuta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         ct_finRuta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -459,13 +460,10 @@ public class VentanaAltas extends javax.swing.JFrame {
         ct_kilometros.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         cb_conductorRuta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cb_conductorRuta.setModel(new DefaultComboBoxModel(laGestora.getLosDNI()));
+        cb_conductorRuta.setModel(new DefaultComboBoxModel(laGestora.getLosDNIdeConductores()));
 
         cb_autobusRuta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cb_autobusRuta.setModel(new DefaultComboBoxModel(laGestora.getLasMatriculas()));
-
-        cb_clienteRuta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cb_clienteRuta.setModel(new DefaultComboBoxModel(laGestora.getLosCodClientes()));
 
         b_limpiarRuta.setText("LIMPIAR");
 
@@ -491,32 +489,26 @@ public class VentanaAltas extends javax.swing.JFrame {
                 .addGroup(p_rutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(p_rutaLayout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addGroup(p_rutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(p_rutaLayout.createSequentialGroup()
-                                .addGap(163, 163, 163)
-                                .addComponent(b_ventanaInforRuta))
-                            .addGroup(p_rutaLayout.createSequentialGroup()
-                                .addGroup(p_rutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(e_ciudadInicio)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel1))
-                                .addGap(18, 18, 18)
-                                .addGroup(p_rutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(ct_inicioRuta)
-                                    .addComponent(ct_finRuta)
-                                    .addComponent(ct_kilometros)
-                                    .addComponent(cb_conductorRuta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cb_autobusRuta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cb_clienteRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 128, Short.MAX_VALUE))
+                        .addGroup(p_rutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(e_ciudadInicio)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(p_rutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ct_inicioRuta)
+                            .addComponent(ct_finRuta)
+                            .addComponent(ct_kilometros)
+                            .addComponent(cb_conductorRuta, 0, 150, Short.MAX_VALUE)
+                            .addComponent(cb_autobusRuta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(p_rutaLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(b_limpiarRuta)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(b_guardarRuta)))
+                        .addGap(109, 109, 109)
+                        .addComponent(b_ventanaInforRuta)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addComponent(b_guardarRuta)
                 .addContainerGap())
         );
         p_rutaLayout.setVerticalGroup(
@@ -542,16 +534,12 @@ public class VentanaAltas extends javax.swing.JFrame {
                 .addGroup(p_rutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(cb_autobusRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(p_rutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(cb_clienteRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addGroup(p_rutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(b_limpiarRuta)
+                    .addComponent(b_ventanaInforRuta)
                     .addComponent(b_guardarRuta)
-                    .addComponent(b_ventanaInforRuta))
-                .addGap(22, 22, 22))
+                    .addComponent(b_limpiarRuta))
+                .addGap(43, 43, 43))
         );
 
         jLabel2.getAccessibleContext().setAccessibleDescription("Los kilómetros sin decimales.");
@@ -680,7 +668,7 @@ public class VentanaAltas extends javax.swing.JFrame {
 
     private void b_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_salirActionPerformed
         this.setVisible(false);
-        JOptionPane.showMessageDialog(null, "GRACIAS. HASTA PRONTO.", "GESTIÓN DE EMPRESA ©", 1);
+        JOptionPane.showMessageDialog(null, "GRACIAS. HASTA PRONTO.", "GESTIÓN DE EMPRESA ©", -1);
         System.exit(0);
     }//GEN-LAST:event_b_salirActionPerformed
 
@@ -745,15 +733,16 @@ public class VentanaAltas extends javax.swing.JFrame {
             if (Pattern.matches("[0-9]{8}[A-Z]{1}", dni)) {
                 if ((laGestora.nuevoTrabajador(dni, nomApe, anio, seccion)) == true) {
                     limpiar(p_trabajador);
+                    escribirArchivos();
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "El número de DNI introducido no es correcto.\n"
-                        + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 1);
+                        + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
             }
 
         } catch (NumberFormatException exNumero) {
             JOptionPane.showMessageDialog(null, "El año introducido no es correcto.\n"
-                    + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 1);
+                    + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
         }
     }
 
@@ -766,22 +755,32 @@ public class VentanaAltas extends javax.swing.JFrame {
             String combustible = cb_combustible.getItemAt(cb_combustible.getSelectedIndex()).toUpperCase();
             int plazas = Integer.parseInt(ct_plazas.getText());
             int precio = Integer.parseInt(ct_precio.getText());
-            if (plazas >= 10 && plazas <= 70) {
-                if (precio >= 20000) {
-                    if (laGestora.nuevoAutobus(matricula, fabricante, modelo, motor, combustible, plazas, precio) == true) {
-                        limpiar(p_autobus);
+            if (laGestora.comprobarMatricula(matricula)) {
+                if (plazas >= 10 && plazas <= 70) {
+                    if (precio >= 20000) {
+                        if (laGestora.nuevoAutobus(matricula, fabricante, modelo, motor, combustible, plazas, precio) == true) {
+                            limpiar(p_autobus);
+                            escribirArchivos();
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El precio no puede ser menor de 20.000.\n"
+                                + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "El precio no puede ser menor de 20.000.\n"
-                            + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 1);
+                    JOptionPane.showMessageDialog(null, "El número de plazas no puede ser menor de 10 ni exceder de 70.\n"
+                            + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "El número de plazas no puede ser menor de 10 ni exceder de 70.\n"
-                        + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 1);
+                JOptionPane.showMessageDialog(null, "La matrícula es incorrecta.\n"
+                        + "La matrícula solo puede estar compuesta por 2 letras, 4 números y 2 letras (VA-2213-AB)\n"
+                        + "o por 4 números y 3 consonantes (3515-BVW).\n"
+                        + "Introduzca los valores sin guiones (VA2213AB y 3515BVW).\n"
+                        + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
             }
+
         } catch (NumberFormatException exNumero) {
             JOptionPane.showMessageDialog(null, "Existen datos incorrectos.\n"
-                    + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 1);
+                    + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
         }
     }
 
@@ -791,23 +790,23 @@ public class VentanaAltas extends javax.swing.JFrame {
         String kilometros = (ct_kilometros.getText());
         String conductor = cb_conductorRuta.getItemAt(cb_conductorRuta.getSelectedIndex());
         String autobus = cb_autobusRuta.getItemAt(cb_autobusRuta.getSelectedIndex());
-        String cliente = cb_clienteRuta.getItemAt(cb_clienteRuta.getSelectedIndex());
         if (Pattern.matches("[0-9]+", kilometros) == true) {
             String cod = null;
             try {
                 cod = generarCodigoRuta(inicio, destino, kilometros);
             } catch (Exception ex1) {
                 JOptionPane.showMessageDialog(null, "Los datos introducidos son incorrectos.\n"
-                        + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 1);
+                        + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
             }
             int distancia = Integer.parseInt(kilometros);
             if (cod != null) {
-                laGestora.nuevaRuta(cod, inicio, destino, distancia, conductor, autobus, cliente);
+                laGestora.nuevaRuta(cod, inicio, destino, distancia, conductor, autobus);
                 limpiar(p_ruta);
+                escribirArchivos();
             }
         } else {
             JOptionPane.showMessageDialog(null, "Los kilómetros introducidos no son correctos.\n"
-                    + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 1);
+                    + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
         }
     }
 
@@ -822,19 +821,29 @@ public class VentanaAltas extends javax.swing.JFrame {
             String codCliente = letras + numero;
             if (laGestora.nuevoCliente(codCliente, nombre, localidad, telefono) == true) {
                 limpiar(p_cliente);
+                escribirArchivos();
             } else {
                 guardarCliente();
             }
         } else {
             JOptionPane.showMessageDialog(null, "El teléfono introducido no es correcto.\n"
-                    + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 1);
+                    + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
         }
     }
 
     private void guardarFactura() {
+        System.out.println("pulsado botón");
         String cliente = cb_clienteFactura.getItemAt(cb_clienteFactura.getSelectedIndex());
         String ruta = cb_rutaFactura.getItemAt(cb_rutaFactura.getSelectedIndex());
-        laGestora.nuevaFactura(cliente, ruta);
+        if (laGestora.nuevaFactura(cliente, ruta) == true) {
+            System.out.println("guardado");
+            limpiar(p_factura);
+            escribirArchivos();
+            System.out.println("escrito");
+        } else {
+            System.out.println("no lo ha hecho bien :V");
+        }
+
     }
 
     private String generarCodigoRuta(String inicio, String fin, String kilometros) {
@@ -852,6 +861,10 @@ public class VentanaAltas extends javax.swing.JFrame {
         VentanaBajas lasBajas = new VentanaBajas();
         lasBajas.setVisible(true);
         lasBajas.mostrarBotonCerrarVentana(true);
+    }
+
+    private void escribirArchivos() {
+        laGestora.escribirArchivos();
     }
 
     private void limpiar(JPanel elPanel) {
@@ -920,7 +933,6 @@ public class VentanaAltas extends javax.swing.JFrame {
     private javax.swing.JButton b_ventanaInforfactura;
     private javax.swing.JComboBox<String> cb_autobusRuta;
     private javax.swing.JComboBox<String> cb_clienteFactura;
-    private javax.swing.JComboBox<String> cb_clienteRuta;
     private javax.swing.JComboBox<String> cb_combustible;
     private javax.swing.JComboBox<String> cb_conductorRuta;
     private javax.swing.JComboBox<String> cb_rutaFactura;
@@ -961,7 +973,6 @@ public class VentanaAltas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JTabbedPane jTabbedPane7;

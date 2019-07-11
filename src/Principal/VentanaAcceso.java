@@ -132,7 +132,7 @@ public class VentanaAcceso extends javax.swing.JFrame {
 
     private void b_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_salirActionPerformed
         this.setVisible(false);
-        JOptionPane.showMessageDialog(null, "HASTA PRONTO.", "GESTIÓN DE EMPRESA ©", 1);
+        JOptionPane.showMessageDialog(null, "HASTA PRONTO.", "GESTIÓN DE EMPRESA ©", -1);
         System.exit(0);
     }//GEN-LAST:event_b_salirActionPerformed
 
@@ -141,9 +141,9 @@ public class VentanaAcceso extends javax.swing.JFrame {
         String passwd = new String(ct_claveAcceso.getPassword());
 
         //if (usuario.equals(usu) && clave.equals(passwd)) {
-            VentanaMenu elMenu = new VentanaMenu();
-            this.setVisible(false);
-            elMenu.setVisible(true);
+        VentanaMenu elMenu = new VentanaMenu();
+        this.setVisible(false);
+        elMenu.setVisible(true);
         /*} else {
             ct_claveAcceso.setText("");
             JOptionPane.showMessageDialog(null, "El usuario o la contraseña son incorrectos.\n"

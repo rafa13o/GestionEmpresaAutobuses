@@ -32,8 +32,8 @@ autobús.
                   Modelo: i6s)
   + RUTAS:
     Las rutas estarán definidas por un código de ruta, la ciudad de inicio,
-la ciudad de fin, los kilómetros recorridos, el conductor que realizará la ruta, el autobús que
-se utilizará y el cliente que lo ha solicitado.
+la ciudad de fin, los kilómetros recorridos, el conductor que realizará la ruta y el autobús que
+se utilizará.
     Restricciones:
       - Código: Estará definido por las iniciales de las ciudades de
 salida y de llegada y los kilómetros entre ambas. A su vez, tendrá 2 letras y 5 números.
@@ -43,7 +43,6 @@ características cambia.
       - Fecha: la fecha no podrá ser inferior a la actual.
       - Conductor: El conductor será un DNI previamente registrado.
       - Autobús: El autobús será una matrícula registrada.
-      - Cliente: El cliente será el nombre de uno ya registrado.
   + CLIENTES:
     Los clientes estarán definidos por un código de cliente, el nombre, la
 localidad y el teléfono de contacto.

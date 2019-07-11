@@ -10,6 +10,7 @@ package Principal;
  * @author Rafa
  */
 public class Trabajador {
+
     String dni; //DNI del trabajador (longitud 9)
     String nombreApellidos; //Nombre y Apellidos del trabajador
     int anioIngreso; //Año de ingreso (no superior al año actual)
@@ -53,6 +54,10 @@ public class Trabajador {
     public void setSeccion(String seccion) {
         this.seccion = seccion;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return dni + ";" + nombreApellidos + ";" + anioIngreso + ";" + seccion+"\n";
+    }
+
 }

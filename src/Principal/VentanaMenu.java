@@ -129,7 +129,7 @@ public class VentanaMenu extends javax.swing.JFrame {
 
     private void b_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_salirActionPerformed
         this.setVisible(false);
-        JOptionPane.showMessageDialog(null, "GRACIAS. HASTA PRONTO.", "GESTIÓN DE EMPRESA ©", 1);
+        JOptionPane.showMessageDialog(null, "GRACIAS. HASTA PRONTO.", "GESTIÓN DE EMPRESA ©", -1);
         System.exit(0);
     }//GEN-LAST:event_b_salirActionPerformed
 

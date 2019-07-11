@@ -163,6 +163,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="DAR DE BAJA TRABAJADORES SELECCIONADOS"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b_bajaTrabajadorActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
