@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Principal;
+package Ventanas;
 
+import Principal.GestoraEmpresa;
 import java.awt.Component;
 import java.awt.HeadlessException;
 import java.awt.Image;

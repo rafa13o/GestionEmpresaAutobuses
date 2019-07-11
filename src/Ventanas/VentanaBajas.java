@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Principal;
+package Ventanas;
 
 import ModeloTablas.ModeloTrabajador;
 import ModeloTablas.ModeloCliente;
 import ModeloTablas.ModeloRuta;
 import ModeloTablas.ModeloFactura;
+import Principal.GestoraEmpresa;
+import Principal.ModeloAutobuses;
 
 import java.awt.Image;
 import javax.swing.DefaultComboBoxModel;
