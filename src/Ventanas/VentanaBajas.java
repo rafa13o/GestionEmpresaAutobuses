@@ -11,6 +11,7 @@ import ModeloTablas.ModeloRuta;
 import ModeloTablas.ModeloFactura;
 import Principal.GestoraEmpresa;
 import Principal.ModeloAutobuses;
+import Principal.Mensajes;
 
 import java.awt.Image;
 import javax.swing.DefaultComboBoxModel;
@@ -18,7 +19,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableRowSorter;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  *
@@ -45,8 +45,9 @@ public class VentanaBajas extends javax.swing.JFrame {
     }
 
     /**
-     * Cuando se abre la ventana desde la ventana Altas, se muestra un botón 
-     *      que permite cerrar esta ventana y no el programa entero.
+     * Cuando se abre la ventana desde la ventana Altas, se muestra un botón que
+     * permite cerrar esta ventana y no el programa entero.
+     *
      * @param caso
      */
     public void mostrarBotonCerrarVentana(boolean caso) {
@@ -128,7 +129,7 @@ public class VentanaBajas extends javax.swing.JFrame {
         p_trabajador.setLayout(p_trabajadorLayout);
         p_trabajadorLayout.setHorizontalGroup(
             p_trabajadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
             .addGroup(p_trabajadorLayout.createSequentialGroup()
                 .addGap(158, 158, 158)
                 .addComponent(b_bajaTrabajador)
@@ -188,7 +189,7 @@ public class VentanaBajas extends javax.swing.JFrame {
                 .addComponent(cb_fabricanteCarroceria, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(b_filtrarBuses)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(131, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p_autobusLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(b_bajaAutobus)
@@ -228,7 +229,7 @@ public class VentanaBajas extends javax.swing.JFrame {
         p_cliente.setLayout(p_clienteLayout);
         p_clienteLayout.setHorizontalGroup(
             p_clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
         );
         p_clienteLayout.setVerticalGroup(
             p_clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,7 +255,7 @@ public class VentanaBajas extends javax.swing.JFrame {
         p_ruta.setLayout(p_rutaLayout);
         p_rutaLayout.setHorizontalGroup(
             p_rutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
         );
         p_rutaLayout.setVerticalGroup(
             p_rutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,7 +281,7 @@ public class VentanaBajas extends javax.swing.JFrame {
         p_factura.setLayout(p_facturaLayout);
         p_facturaLayout.setHorizontalGroup(
             p_facturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
         );
         p_facturaLayout.setVerticalGroup(
             p_facturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,19 +316,17 @@ public class VentanaBajas extends javax.swing.JFrame {
         p_principalLayout.setHorizontalGroup(
             p_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(p_principalLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(p_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextArea1)
                     .addGroup(p_principalLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(p_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextArea1)
-                            .addGroup(p_principalLayout.createSequentialGroup()
-                                .addComponent(b_menu)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(b_cerrarVentana)
-                                .addGap(87, 87, 87)
-                                .addComponent(b_salir))))
-                    .addComponent(jTabbedPane1))
+                        .addComponent(b_menu)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(b_cerrarVentana)
+                        .addGap(87, 87, 87)
+                        .addComponent(b_salir)))
                 .addContainerGap())
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
         );
         p_principalLayout.setVerticalGroup(
             p_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,7 +348,7 @@ public class VentanaBajas extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(p_principal, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(p_principal, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -418,6 +417,44 @@ public class VentanaBajas extends javax.swing.JFrame {
     }//GEN-LAST:event_b_filtrarBusesActionPerformed
 
     private void b_bajaAutobusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_bajaAutobusActionPerformed
+        darBajaAutobus();
+    }//GEN-LAST:event_b_bajaAutobusActionPerformed
+
+    private void b_bajaTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_bajaTrabajadorActionPerformed
+        darBajaTrabajador();
+    }//GEN-LAST:event_b_bajaTrabajadorActionPerformed
+
+    private void darBajaTrabajador() {
+        try {
+            ArrayList<String> dniSeleccionado = new ArrayList();
+            int[] filas = t_trabajador.getSelectedRows();
+            for (int i = 0; i < filas.length; i++) {
+                Object seleccionado = t_trabajador.getValueAt(filas[i], 0);
+                dniSeleccionado.add(seleccionado.toString());
+            }
+            String[] trabajadorSeleccionado = new String[dniSeleccionado.size()];
+            for (int i = 0; i < dniSeleccionado.size(); i++) {
+                trabajadorSeleccionado[i] = dniSeleccionado.get(i);
+            }
+            if (trabajadorSeleccionado.length != 0 && laGestora.borrarTrabajador(trabajadorSeleccionado) == true) {
+                if (trabajadorSeleccionado.length == 1) {
+                    Mensajes.mensajesDeResultado("TRABAJADOR1");
+                    ejecutarAlBorrarDatos();
+                } else {
+                    Mensajes.mensajesDeResultado("TRABAJADOR2");
+                    ejecutarAlBorrarDatos();
+                }
+            } else {
+                Mensajes.mensajesDeError("BAJA_TRABAJADOR");
+            }
+        } catch (ArrayIndexOutOfBoundsException ex1) {
+            Mensajes.mensajesDeError("BAJA_TRABAJADOR");
+        } catch (IndexOutOfBoundsException ex2) {
+            Mensajes.mensajesDeError("BAJA_TRABAJADOR");
+        }
+    }
+
+    private void darBajaAutobus() {
         try {
             ArrayList<String> matriculaSeleccionada = new ArrayList();
             int[] fila = t_autobus.getSelectedRows();
@@ -430,59 +467,23 @@ public class VentanaBajas extends javax.swing.JFrame {
             for (int i = 0; i < autobusSeleccionado.length; i++) {
                 autobusSeleccionado[i] = matriculaSeleccionada.get(i);
             }
-            if (laGestora.borrarAutobus(autobusSeleccionado) == true) {
-                if(autobusSeleccionado.length==1){
-                    JOptionPane.showMessageDialog(null, "El autobús se ha dado de baja con éxito.", "Resultado - GESTIÓN DE EMPRESA ©", 1);
-                ejecutarAlBorrarDatos();
-                }else{
-                    JOptionPane.showMessageDialog(null, "Los autobuses se han dado de baja con éxito.", "Resultado - GESTIÓN DE EMPRESA ©", 1);
-                ejecutarAlBorrarDatos();
-                }
-                
-            } else {
-                JOptionPane.showMessageDialog(null, "No se ha podido dar de baja ningún autobús.\n"
-                        + "Por favor, compruebe que ha seleccionado uno e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
-
-            }
-        } catch (ArrayIndexOutOfBoundsException ex1) {
-            JOptionPane.showMessageDialog(null, "No se ha podido dar de baja ningún autobús.\n"
-                    + "Por favor, compruebe que ha seleccionado uno e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
-        }
-    }//GEN-LAST:event_b_bajaAutobusActionPerformed
-
-    private void b_bajaTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_bajaTrabajadorActionPerformed
-        try {
-            ArrayList<String> dniSeleccionado = new ArrayList();
-            int[] filas = t_trabajador.getSelectedRows();
-            for (int i = 0; i < filas.length; i++) {
-                Object seleccionado = t_trabajador.getValueAt(filas[i], 0);
-                dniSeleccionado.add(seleccionado.toString());
-            }
-            String[] trabajadorSeleccionado = new String[dniSeleccionado.size()];
-            for (int i = 0; i < dniSeleccionado.size(); i++) {
-                trabajadorSeleccionado[i] = dniSeleccionado.get(i);
-                System.out.println(Arrays.toString(trabajadorSeleccionado));
-            }
-            if (laGestora.borrarTrabajador(trabajadorSeleccionado)) {
-                if (trabajadorSeleccionado.length == 1) {
-                    JOptionPane.showMessageDialog(null, "El trabajador se ha dado de baja con éxito.", "Resultado - GESTIÓN DE EMPRESA ©", 1);
+            if (autobusSeleccionado.length != 0 && laGestora.borrarAutobus(autobusSeleccionado) == true) {
+                if (autobusSeleccionado.length == 1) {
+                    Mensajes.mensajesDeResultado("AUTOBUS1");
                     ejecutarAlBorrarDatos();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Los trabajadores se han dado de baja con éxito.", "Resultado - GESTIÓN DE EMPRESA ©", 1);
+                    Mensajes.mensajesDeResultado("AUTOBUS2");
                     ejecutarAlBorrarDatos();
                 }
+
             } else {
-                JOptionPane.showMessageDialog(null, "No se ha podido dar de baja a ningún trabajador.\n"
-                        + "Por favor, compruebe que ha seleccionado al menos uno e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
+                Mensajes.mensajesDeError("BAJA_AUTOBUS");
             }
         } catch (ArrayIndexOutOfBoundsException ex1) {
-            JOptionPane.showMessageDialog(null, "No se ha podido dar de baja a ningún trabajador33.\n"
-                    + "Por favor, compruebe que ha seleccionado al menos uno e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
-//        } catch (IndexOutOfBoundsException ex2) {
-//            JOptionPane.showMessageDialog(null, "No se ha podido dar de baja a ningún trabajador44.\n"
-//                    + "Por favor, compruebe que ha seleccionado al menos uno e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
+            Mensajes.mensajesDeError("BAJA_AUTOBUS");
+
         }
-    }//GEN-LAST:event_b_bajaTrabajadorActionPerformed
+    }
 
     private void ejecutarAlBorrarDatos() {
         laGestora.escribirArchivos();

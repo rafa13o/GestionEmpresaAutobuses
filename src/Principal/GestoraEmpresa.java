@@ -15,7 +15,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Pattern;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -45,19 +44,6 @@ public class GestoraEmpresa {
      */
     public GestoraEmpresa() {
         leerArchivos();
-//        losTrabajadores.add(new Trabajador("12345678J", "TRECENIO RODRIGUEZ, RAFAEL", 2019, "CONDUCTOR"));
-//        losTrabajadores.add(new Trabajador("12345678Z", "TRECENIO RODRIGUEZ, RAFAEL", 2016, "DIRECCION"));
-//        losAutobuses.add(new Autobus("5188JSG", "IRIZAR", "I6S", "MECEDES-BENZ", "HIBRIDO", 55, 30000));
-//        losAutobuses.add(new Autobus("3515BVW", "IRIZAR", "I6", "RENAULT", "GASOLINA", 55, 30000));
-//        losAutobuses.add(new Autobus("9876JZP", "AYATS", "ATLANTIS", "SCANIA", "DIESEL", 70, 70000));
-//        losClientes.add(new Cliente("RAF123", "RAFAEL", "VALLADOLID", 123654789));
-//        losClientes.add(new Cliente("VAC123", "VACCEO CRAFT BEER S.L.", "MADRID", 917654321));
-//        lasRutas.add(new Ruta("VM00184", "VALLADOLID", "MADRID", 184, "12345678J", "5188JSG", "VAC123"));
-//        lasRutas.add(new Ruta("VP02262", "VALLADOLID", "POTSDAM", 2262, "12345678J", "9876JZP", "RAF123"));
-//        LocalDate fecha = LocalDate.of(2019, 07, 10);
-//        lasFacturas.add(new Factura(1, "RAFAEL", "VALLADOLID", 123654789, "VM00184", fecha, 36.8));
-//        lasFacturas.add(new Factura(2, "VACCEO CRAFT BEER S.L.", "MADRID", 917654321, "VP02262", fecha, 452.4));
-//        escribirArchivos();
     }
 
     //GENERAR NUEVOS DATOS******************************************************************************************************
@@ -81,12 +67,10 @@ public class GestoraEmpresa {
                 losTrabajadores.add(elTrabajador);
                 return true;
             } else {
-                JOptionPane.showMessageDialog(null, "El año no puede ser posterior al actual.\n"
-                        + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 1);
+                Mensajes.mensajesDeError("ANIO_POSTERIOR");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "El DNI pertenece a un trabajador ya existente.\n"
-                    + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 1);
+            Mensajes.mensajesDeError("DNI_EXISTE");
         }
         return false;
     }
@@ -118,8 +102,7 @@ public class GestoraEmpresa {
             losAutobuses.add(elAutobus);
             return true;
         } else {
-            JOptionPane.showMessageDialog(null, "La matrícula pertenece a un autobús ya existente.\n"
-                    + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 1);
+            Mensajes.mensajesDeError("MATRICULA_EXISTE");
         }
         return false;
     }
@@ -188,7 +171,6 @@ public class GestoraEmpresa {
         int lugarClienteEnArray = 0;
         int lugarRutaEnArray = 0;
         String[] clientes = getLosCodClientes();
-        System.out.println("coge los codigos de clientes");
         for (int i = 0; i < clientes.length; i++) {//Recoger código de cliente
             if (clientes[i].equals(cliente)) {
                 lugarClienteEnArray = i;
@@ -196,7 +178,6 @@ public class GestoraEmpresa {
             }
         }
         String[] rutas = getLosCodRutas();
-        System.out.println("coge los codigos de las rutas");
         for (int i = 0; i < rutas.length; i++) {//Recoger código de ruta
             if (rutas[i].equals(ruta)) {
                 lugarRutaEnArray = i;
@@ -272,6 +253,7 @@ public class GestoraEmpresa {
 
     /**
      * Devuelve todos los DNI
+     *
      * @return un array con todos los DNI
      */
     public String[] getTodosLosDNI() {
@@ -388,15 +370,14 @@ public class GestoraEmpresa {
     }
 
     //ELIMINACIÓN DE DATOS*******************************************************************************************************
-
     /**
-     * Borra a los trabajadores seleccionados identificándolos por sus matrículas
-     *      1/ Hace una copia del arrayList losTrabajadores
-     *      2/ Crea un arrayList con solo los DNI
-     *      3/ Busca el lugar en el que están los DNI seleccionadas
-     *      4/ Vacía losTrabajadores
-     *      5/ Va copiando todo a losTrabajadores.
-     *          Si el arrayList lugarEnArray contiene la posición, la salta.
+     * Borra a los trabajadores seleccionados identificándolos por sus
+     * matrículas 1/ Hace una copia del arrayList losTrabajadores 2/ Crea un
+     * arrayList con solo los DNI 3/ Busca el lugar en el que están los DNI
+     * seleccionadas 4/ Vacía losTrabajadores 5/ Va copiando todo a
+     * losTrabajadores. Si el arrayList lugarEnArray contiene la posición, la
+     * salta.
+     *
      * @param dni
      * @return true si lo ha conseguido hacer : false si ha habido algún error
      */
@@ -432,13 +413,12 @@ public class GestoraEmpresa {
     }
 
     /**
-     * Borra los autobuses seleccionados por sus matrículas.
-     *      1/ Hace una copia del arrayList losAutobuses
-     *      2/ Crea un arrayList con solo las matrículas
-     *      3/ Busca el lugar en el que están las matrículas seleccionadas
-     *      4/ Vacía losAutobuses
-     *      5/ Va copiando todo a losAutobuses. 
-     *          Si el arrayList lugarEnArray contiene la posición, la salta.
+     * Borra los autobuses seleccionados por sus matrículas. 1/ Hace una copia
+     * del arrayList losAutobuses 2/ Crea un arrayList con solo las matrículas
+     * 3/ Busca el lugar en el que están las matrículas seleccionadas 4/ Vacía
+     * losAutobuses 5/ Va copiando todo a losAutobuses. Si el arrayList
+     * lugarEnArray contiene la posición, la salta.
+     *
      * @param matricula
      * @return true si lo ha hecho : false si ha ocurrido algún problema
      */
@@ -472,10 +452,10 @@ public class GestoraEmpresa {
     }
 
     //MODELOS DE TABLAS**********************************************************************************************************
-
     /**
-     * Devuelve todos los autobuses para pasarlos posteriormente al modelo de tabla.
-     * El parámetro sirve para poder filtrar posteriormente
+     * Devuelve todos los autobuses para pasarlos posteriormente al modelo de
+     * tabla. El parámetro sirve para poder filtrar posteriormente
+     *
      * @param fabricante
      * @return un array con los autobuses
      */
@@ -505,6 +485,7 @@ public class GestoraEmpresa {
 
     /**
      * Devuelve todos los trabajadores para pasarlos al modelo de tabla
+     *
      * @return un array con todos los trabajadores
      */
     public Trabajador[] getLosTrabajadores() {
@@ -523,6 +504,7 @@ public class GestoraEmpresa {
 
     /**
      * Devuelve todos los clientes para pasarlos al modelo de tabla
+     *
      * @return un array con los clientes
      */
     public Cliente[] getLosClientes() {
@@ -540,6 +522,7 @@ public class GestoraEmpresa {
 
     /**
      * Devuelve todas las rutas para luego pasarlas al modelo de tabla
+     *
      * @return un array con las rutas
      */
     public Ruta[] getLasRutas() {
@@ -557,6 +540,7 @@ public class GestoraEmpresa {
 
     /**
      * Devuelve todas las facturas para luego pasarlas al modelo de tabla
+     *
      * @return un array con las facturas
      */
     public Factura[] getLasFacturas() {
@@ -573,9 +557,9 @@ public class GestoraEmpresa {
     }
 
     //LECTURA Y ESCRITURA DE DATOS***********************************************************************************************
-
     /**
      * Lee los datos de los los archivos y los guarda en los arrays.
+     *
      * @return true si ha podido leer : false si ha ocurrido alguna excepción
      */
     public boolean leerArchivos() {
@@ -638,8 +622,10 @@ public class GestoraEmpresa {
     }
 
     /**
-     * Escribe los datos de los arrays en los archivos. 
-     * @return true si ha podido escribir : false si ha ocurrido alguna excepción
+     * Escribe los datos de los arrays en los archivos.
+     *
+     * @return true si ha podido escribir : false si ha ocurrido alguna
+     * excepción
      */
     public boolean escribirArchivos() {
         try {
@@ -692,16 +678,13 @@ public class GestoraEmpresa {
     }
 
     //COTEJAMIENTO DE DATOS*****************************************************************************************************
-
     /**
-     * Comprueba si la matrícula introducida a la hora de dar de alta un autobús es correcta
-     *      Matrículas nuevas: Deben estar formadas por:
-     *          4 números
-     *          3 letras, no pudiendo ser estas una vocal o la Ñ
-     *      Matrículas antiguas: Deben estar formadas por:
-     *          1 ó 2 letras
-     *          4 números
-     *          2 letras, que pueden ser vocales o consonantes a excepción de la Ñ
+     * Comprueba si la matrícula introducida a la hora de dar de alta un autobús
+     * es correcta Matrículas nuevas: Deben estar formadas por: 4 números 3
+     * letras, no pudiendo ser estas una vocal o la Ñ Matrículas antiguas: Deben
+     * estar formadas por: 1 ó 2 letras 4 números 2 letras, que pueden ser
+     * vocales o consonantes a excepción de la Ñ
+     *
      * @param matricula
      * @return true si la matrícula es correcta : false si no es correcta
      */
@@ -714,3 +697,4 @@ public class GestoraEmpresa {
         return false;
     }
 }
+

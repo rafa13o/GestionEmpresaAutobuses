@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
+import Principal.Mensajes;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -669,7 +669,7 @@ public class VentanaAltas extends javax.swing.JFrame {
 
     private void b_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_salirActionPerformed
         this.setVisible(false);
-        JOptionPane.showMessageDialog(null, "GRACIAS. HASTA PRONTO.", "GESTIÓN DE EMPRESA ©", -1);
+        Mensajes.mensajeDeSalida();
         System.exit(0);
     }//GEN-LAST:event_b_salirActionPerformed
 
@@ -737,13 +737,11 @@ public class VentanaAltas extends javax.swing.JFrame {
                     escribirArchivos();
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "El número de DNI introducido no es correcto.\n"
-                        + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
+                Mensajes.mensajesDeError("DNI");
             }
 
         } catch (NumberFormatException exNumero) {
-            JOptionPane.showMessageDialog(null, "El año introducido no es correcto.\n"
-                    + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
+            Mensajes.mensajesDeError("ANIO");
         }
     }
 
@@ -764,24 +762,17 @@ public class VentanaAltas extends javax.swing.JFrame {
                             escribirArchivos();
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "El precio no puede ser menor de 20.000.\n"
-                                + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
+                        Mensajes.mensajesDeError("PRECIO");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "El número de plazas no puede ser menor de 10 ni exceder de 70.\n"
-                            + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
+                    Mensajes.mensajesDeError("PLAZAS");
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "La matrícula es incorrecta.\n"
-                        + "La matrícula solo puede estar compuesta por 2 letras, 4 números y 2 letras (VA-2213-AB)\n"
-                        + "o por 4 números y 3 consonantes (3515-BVW).\n"
-                        + "Introduzca los valores sin guiones (VA2213AB y 3515BVW).\n"
-                        + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
+                Mensajes.mensajesDeError("MATRICULA");
             }
 
         } catch (NumberFormatException exNumero) {
-            JOptionPane.showMessageDialog(null, "Existen datos incorrectos.\n"
-                    + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
+            Mensajes.mensajesDeError("GENERAL");
         }
     }
 
@@ -796,8 +787,7 @@ public class VentanaAltas extends javax.swing.JFrame {
             try {
                 cod = generarCodigoRuta(inicio, destino, kilometros);
             } catch (Exception ex1) {
-                JOptionPane.showMessageDialog(null, "Los datos introducidos son incorrectos.\n"
-                        + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
+                Mensajes.mensajesDeError("GENERAL");
             }
             int distancia = Integer.parseInt(kilometros);
             if (cod != null) {
@@ -806,8 +796,7 @@ public class VentanaAltas extends javax.swing.JFrame {
                 escribirArchivos();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Los kilómetros introducidos no son correctos.\n"
-                    + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
+            Mensajes.mensajesDeError("KILOMETROS");
         }
     }
 
@@ -827,22 +816,18 @@ public class VentanaAltas extends javax.swing.JFrame {
                 guardarCliente();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "El teléfono introducido no es correcto.\n"
-                    + "Por favor, revise los datos e inténtelo de nuevo", "Error - GESTIÓN DE EMPRESA ©", 0);
+            Mensajes.mensajesDeError("TELEFONO");
         }
     }
 
     private void guardarFactura() {
-        System.out.println("pulsado botón");
         String cliente = cb_clienteFactura.getItemAt(cb_clienteFactura.getSelectedIndex());
         String ruta = cb_rutaFactura.getItemAt(cb_rutaFactura.getSelectedIndex());
         if (laGestora.nuevaFactura(cliente, ruta) == true) {
-            System.out.println("guardado");
             limpiar(p_factura);
             escribirArchivos();
-            System.out.println("escrito");
         } else {
-            System.out.println("no lo ha hecho bien :V");
+            Mensajes.mensajesDeError("FACTURA");
         }
 
     }
