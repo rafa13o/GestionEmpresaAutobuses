@@ -44,6 +44,11 @@ public class VentanaBajas extends javax.swing.JFrame {
         mostrarBotonCerrarVentana(false);
     }
 
+    /**
+     * Cuando se abre la ventana desde la ventana Altas, se muestra un botón 
+     *      que permite cerrar esta ventana y no el programa entero.
+     * @param caso
+     */
     public void mostrarBotonCerrarVentana(boolean caso) {
         b_cerrarVentana.setVisible(caso);
     }

@@ -40,6 +40,9 @@ public class GestoraEmpresa {
     EnumSecciones[] lasSecciones = EnumSecciones.values();
     EnumCombustible[] losCombustibles = EnumCombustible.values();
 
+    /**
+     *
+     */
     public GestoraEmpresa() {
         leerArchivos();
 //        losTrabajadores.add(new Trabajador("12345678J", "TRECENIO RODRIGUEZ, RAFAEL", 2019, "CONDUCTOR"));
@@ -233,7 +236,7 @@ public class GestoraEmpresa {
      * utilizarlo en el ComboBox de los combustibles en la pestaña de añadir un
      * nuevo autobús
      *
-     * @return
+     * @return un array con los tipos de combustible
      */
     public String[] getLosCombustibles() {
         String[] combustibles = new String[losCombustibles.length];
@@ -246,7 +249,7 @@ public class GestoraEmpresa {
     /**
      * Devuelve los DNI de los conductores para formar el ComboBox de la ventana
      *
-     * @return DNI
+     * @return un array con los DNI de los conductores
      */
     public String[] getLosDNIdeConductores() {
         ArrayList<String> dniConductores = new ArrayList();
@@ -267,6 +270,10 @@ public class GestoraEmpresa {
         return null;
     }
 
+    /**
+     * Devuelve todos los DNI
+     * @return un array con todos los DNI
+     */
     public String[] getTodosLosDNI() {
         ArrayList<String> losDni = new ArrayList();
         try {
@@ -381,6 +388,18 @@ public class GestoraEmpresa {
     }
 
     //ELIMINACIÓN DE DATOS*******************************************************************************************************
+
+    /**
+     * Borra a los trabajadores seleccionados identificándolos por sus matrículas
+     *      1/ Hace una copia del arrayList losTrabajadores
+     *      2/ Crea un arrayList con solo los DNI
+     *      3/ Busca el lugar en el que están los DNI seleccionadas
+     *      4/ Vacía losTrabajadores
+     *      5/ Va copiando todo a losTrabajadores.
+     *          Si el arrayList lugarEnArray contiene la posición, la salta.
+     * @param dni
+     * @return true si lo ha conseguido hacer : false si ha habido algún error
+     */
     public boolean borrarTrabajador(String[] dni) {
         try {
             ArrayList<Integer> lugarEnArray = new ArrayList();
@@ -412,6 +431,17 @@ public class GestoraEmpresa {
         return false;
     }
 
+    /**
+     * Borra los autobuses seleccionados por sus matrículas.
+     *      1/ Hace una copia del arrayList losAutobuses
+     *      2/ Crea un arrayList con solo las matrículas
+     *      3/ Busca el lugar en el que están las matrículas seleccionadas
+     *      4/ Vacía losAutobuses
+     *      5/ Va copiando todo a losAutobuses. 
+     *          Si el arrayList lugarEnArray contiene la posición, la salta.
+     * @param matricula
+     * @return true si lo ha hecho : false si ha ocurrido algún problema
+     */
     public boolean borrarAutobus(String[] matricula) {
         try {
             ArrayList<Autobus> todosLosAutobuses = new ArrayList();
@@ -442,6 +472,13 @@ public class GestoraEmpresa {
     }
 
     //MODELOS DE TABLAS**********************************************************************************************************
+
+    /**
+     * Devuelve todos los autobuses para pasarlos posteriormente al modelo de tabla.
+     * El parámetro sirve para poder filtrar posteriormente
+     * @param fabricante
+     * @return un array con los autobuses
+     */
     public Autobus[] getLosAutobuses(String fabricante) {
         ArrayList<Autobus> losBuses = new ArrayList();
         try {
@@ -466,6 +503,10 @@ public class GestoraEmpresa {
         return null;
     }
 
+    /**
+     * Devuelve todos los trabajadores para pasarlos al modelo de tabla
+     * @return un array con todos los trabajadores
+     */
     public Trabajador[] getLosTrabajadores() {
         Trabajador[] trabajadores = new Trabajador[losTrabajadores.size()];
         try {
@@ -480,6 +521,10 @@ public class GestoraEmpresa {
         return null;
     }
 
+    /**
+     * Devuelve todos los clientes para pasarlos al modelo de tabla
+     * @return un array con los clientes
+     */
     public Cliente[] getLosClientes() {
         Cliente[] clientes = new Cliente[losClientes.size()];
         try {
@@ -493,6 +538,10 @@ public class GestoraEmpresa {
         return null;
     }
 
+    /**
+     * Devuelve todas las rutas para luego pasarlas al modelo de tabla
+     * @return un array con las rutas
+     */
     public Ruta[] getLasRutas() {
         Ruta[] rutas = new Ruta[lasRutas.size()];
         try {
@@ -506,6 +555,10 @@ public class GestoraEmpresa {
         return null;
     }
 
+    /**
+     * Devuelve todas las facturas para luego pasarlas al modelo de tabla
+     * @return un array con las facturas
+     */
     public Factura[] getLasFacturas() {
         Factura[] facturas = new Factura[lasFacturas.size()];
         try {
@@ -520,6 +573,11 @@ public class GestoraEmpresa {
     }
 
     //LECTURA Y ESCRITURA DE DATOS***********************************************************************************************
+
+    /**
+     * Lee los datos de los los archivos y los guarda en los arrays.
+     * @return true si ha podido leer : false si ha ocurrido alguna excepción
+     */
     public boolean leerArchivos() {
         try {
             BufferedReader archivoTrabajadores = new BufferedReader(new FileReader("trabajadores.csv"));
@@ -579,6 +637,10 @@ public class GestoraEmpresa {
         return false;
     }
 
+    /**
+     * Escribe los datos de los arrays en los archivos. 
+     * @return true si ha podido escribir : false si ha ocurrido alguna excepción
+     */
     public boolean escribirArchivos() {
         try {
             BufferedWriter archivoTrabajadores = new BufferedWriter(new FileWriter("trabajadores.csv"));
@@ -630,6 +692,19 @@ public class GestoraEmpresa {
     }
 
     //COTEJAMIENTO DE DATOS*****************************************************************************************************
+
+    /**
+     * Comprueba si la matrícula introducida a la hora de dar de alta un autobús es correcta
+     *      Matrículas nuevas: Deben estar formadas por:
+     *          4 números
+     *          3 letras, no pudiendo ser estas una vocal o la Ñ
+     *      Matrículas antiguas: Deben estar formadas por:
+     *          1 ó 2 letras
+     *          4 números
+     *          2 letras, que pueden ser vocales o consonantes a excepción de la Ñ
+     * @param matricula
+     * @return true si la matrícula es correcta : false si no es correcta
+     */
     public boolean comprobarMatricula(String matricula) {
         if (Pattern.matches("[0-9]{4}[BCDFGHJKLMNPQRSTVWXYZ]{3}", matricula)) {
             return true;

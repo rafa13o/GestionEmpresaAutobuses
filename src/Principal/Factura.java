@@ -89,6 +89,6 @@ public class Factura {
 
     @Override
     public String toString() {
-        return nFactura + ";" + cliente + ";" + localidad + ";" + telefono + ";" + ruta + ";" + fechaFactura + ";" + precio+"\n";
+        return nFactura + ";" + cliente + ";" + localidad + ";" + telefono + ";" + ruta + ";" + fechaFactura + ";" + precio + "\n";
     }
 }
