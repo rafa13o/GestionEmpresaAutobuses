@@ -10,14 +10,17 @@ package Principal;
  * @author Rafa
  */
 public class Usuario {
+
     String nombre; //Nombre del usuario que puede utilizar el servicio
     String usuario; //Nombre de usuario para el acceso
     String clave; //Clave de acceso
+    boolean privilegios; //Privilegios para crear o borrar usuarios
 
-    public Usuario(String nombre, String usuario, String clave) {
+    public Usuario(String nombre, String usuario, String clave, boolean privilegios) {
         this.nombre = nombre;
         this.usuario = usuario;
         this.clave = clave;
+        this.privilegios = privilegios;
     }
 
     public String getNombre() {
@@ -43,6 +46,18 @@ public class Usuario {
     public void setClave(String clave) {
         this.clave = clave;
     }
-    
-    
+
+    public boolean isPrivilegios() {
+        return privilegios;
+    }
+
+    public void setPrivilegios(boolean privilegios) {
+        this.privilegios = privilegios;
+    }
+
+    @Override
+    public String toString() {
+        return usuario + ";" + nombre + ";" + clave + ";" + privilegios+"\n";
+    }
+
 }

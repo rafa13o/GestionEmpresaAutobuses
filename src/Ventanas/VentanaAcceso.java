@@ -5,6 +5,7 @@
  */
 package Ventanas;
 
+import Principal.GestoraEmpresa;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -14,6 +15,9 @@ import javax.swing.JOptionPane;
  * @author NEWASUSOJO2
  */
 public class VentanaAcceso extends javax.swing.JFrame {
+
+    GestoraEmpresa laGestora = new GestoraEmpresa();
+    public boolean privilegios;
 
     /**
      * Creates new form VentanaMenu
@@ -27,10 +31,6 @@ public class VentanaAcceso extends javax.swing.JFrame {
 
         }
     }
-
-    String usuario = "rafa13o";
-    String nombre = "Rafael";
-    String clave = "RAFA123";
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -137,19 +137,20 @@ public class VentanaAcceso extends javax.swing.JFrame {
     }//GEN-LAST:event_b_salirActionPerformed
 
     private void b_accederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_accederActionPerformed
-        String usu = ct_usuario.getText();
+        String usu = ct_usuario.getText().toUpperCase();
         String passwd = new String(ct_claveAcceso.getPassword());
 
-        //if (usuario.equals(usu) && clave.equals(passwd)) {
-        VentanaMenu elMenu = new VentanaMenu();
-        this.setVisible(false);
-        elMenu.setVisible(true);
-        /*} else {
-            ct_claveAcceso.setText("");
-            JOptionPane.showMessageDialog(null, "El usuario o la contraseña son incorrectos.\n"
-                    + "Por favor, revise los datos e inténtelo de nuevo", "ERROR", 0);
-        }*/
+        if (laGestora.comprobarUsuario(usu, passwd) == true) {
+            VentanaMenu elMenu = new VentanaMenu();
+            privilegios = laGestora.comprobarPrivilegios(usu);
+            this.setVisible(false);
+            elMenu.setVisible(true);
+        }
+
     }//GEN-LAST:event_b_accederActionPerformed
+    public boolean getPrivilegios() {
+        return privilegios;
+    }
 
     /**
      * @param args the command line arguments

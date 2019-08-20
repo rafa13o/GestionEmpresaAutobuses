@@ -197,6 +197,38 @@ public class GestoraEmpresa {
         return true;
     }
 
+    /**
+     * Genera un nuevo usuario que puede acceder al programa
+     *
+     * @param usuario
+     * @param clave
+     * @param privilegios
+     * @return
+     */
+    public boolean nuevoUsuario(String usuario, String clave, boolean privilegios) {
+        try {
+            String[] dnis = getTodosLosDNI();
+            int lugar = -1;
+            for (int i = 0; i < dnis.length; i++) {
+                if (dnis[i].equals(usuario)) {
+                    lugar = i;
+                    break;
+                }
+            }
+            Trabajador trabajadorUsuario = losTrabajadores.get(lugar);
+            String nombreApellidos = trabajadorUsuario.getNombreApellidos();
+            int coma = nombreApellidos.indexOf(",");
+            String nombre = nombreApellidos.substring(coma + 2);
+
+            elUsuario = new Usuario(usuario, nombre, clave, privilegios);
+            losUsuarios.add(elUsuario);
+            return true;
+        } catch (NullPointerException err1) {
+
+        }
+        return false;
+    }
+
     //OBTENCIÓN DE DATOS********************************************************************************************************
     /**
      * Crea un array con las secciones del enum secciones para utilizarlo en el
@@ -243,6 +275,25 @@ public class GestoraEmpresa {
             String[] dni = new String[dniConductores.size()];
             for (int i = 0; i < dni.length; i++) {
                 dni[i] = dniConductores.get(i);
+            }
+            return dni;
+        } catch (NullPointerException err1) {
+
+        }
+        return null;
+    }
+
+    public String[] getLosDNIdeDireccion() {
+        ArrayList<String> dniDireccion = new ArrayList();
+        try {
+            for (Trabajador unTrabajador : losTrabajadores) {
+                if (unTrabajador.getSeccion().equalsIgnoreCase("DIRECCION")) {
+                    dniDireccion.add(unTrabajador.getDni());
+                }
+            }
+            String[] dni = new String[dniDireccion.size()];
+            for (int i = 0; i < dni.length; i++) {
+                dni[i] = dniDireccion.get(i);
             }
             return dni;
         } catch (NullPointerException err1) {
@@ -367,6 +418,18 @@ public class GestoraEmpresa {
 
         }
         return null;
+    }
+
+    /**
+     * Devuelve el nombre del usuario que ha accedido a la plataforma
+     *
+     * @param usuario
+     * @return
+     */
+    public String getElNombreDelUsuario(String usuario) {
+        Usuario usuarioAcceso = losUsuarios.get(losUsuarios.indexOf(usuario));
+        String nombre = usuarioAcceso.getNombre();
+        return nombre;
     }
 
     //ELIMINACIÓN DE DATOS*******************************************************************************************************
@@ -556,6 +619,19 @@ public class GestoraEmpresa {
         return null;
     }
 
+    public Usuario[] getLosUsuarios() {
+        Usuario[] usuarios = new Usuario[losUsuarios.size()];
+        try {
+            for (int i = 0; i < usuarios.length; i++) {
+                usuarios[i] = losUsuarios.get(i);
+            }
+            return usuarios;
+        } catch (NullPointerException err1) {
+
+        }
+        return null;
+    }
+
     //LECTURA Y ESCRITURA DE DATOS***********************************************************************************************
     /**
      * Lee los datos de los los archivos y los guarda en los arrays.
@@ -569,7 +645,8 @@ public class GestoraEmpresa {
             BufferedReader archivoClientes = new BufferedReader(new FileReader("clientes.csv"));
             BufferedReader archivoRutas = new BufferedReader(new FileReader("rutas.csv"));
             BufferedReader archivoFacturas = new BufferedReader(new FileReader("facturas.csv"));
-            BufferedReader[] archivosParaLeer = {archivoTrabajadores, archivoAutobuses, archivoClientes, archivoRutas, archivoFacturas};
+            BufferedReader archivoUsuarios = new BufferedReader(new FileReader("usuarios.csv"));
+            BufferedReader[] archivosParaLeer = {archivoTrabajadores, archivoAutobuses, archivoClientes, archivoRutas, archivoFacturas, archivoUsuarios};
 
             for (int i = 0; i < archivosParaLeer.length; i++) {
                 ArrayList listadoLeer = new ArrayList();
@@ -601,6 +678,10 @@ public class GestoraEmpresa {
                         case 4://Factura
                             laFactura = new Factura(Integer.parseInt(datos[0]), datos[1], datos[2], Integer.parseInt(datos[3]), datos[4], LocalDate.parse(datos[5]), Double.parseDouble(datos[6]));
                             lasFacturas.add(laFactura);
+                            break;
+                        case 5://Usuarios
+                            elUsuario = new Usuario(datos[0], datos[1], datos[2], Boolean.parseBoolean(datos[3]));
+                            losUsuarios.add(elUsuario);
                             break;
                     }
                 }
@@ -634,7 +715,8 @@ public class GestoraEmpresa {
             BufferedWriter archivoClientes = new BufferedWriter(new FileWriter("clientes.csv"));
             BufferedWriter archivoRutas = new BufferedWriter(new FileWriter("rutas.csv"));
             BufferedWriter archivoFacturas = new BufferedWriter(new FileWriter("facturas.csv"));
-            BufferedWriter[] archivosParaEscribir = {archivoTrabajadores, archivoAutobuses, archivoClientes, archivoRutas, archivoFacturas};
+            BufferedWriter archivoUsuarios = new BufferedWriter(new FileWriter("usuarios.csv"));
+            BufferedWriter[] archivosParaEscribir = {archivoTrabajadores, archivoAutobuses, archivoClientes, archivoRutas, archivoFacturas, archivoUsuarios};
 
             for (int i = 0; i < archivosParaEscribir.length; i++) {
                 switch (i) {
@@ -662,7 +744,12 @@ public class GestoraEmpresa {
                         for (Factura unaFactura : lasFacturas) {
                             archivosParaEscribir[i].write(unaFactura.toString());
                         }
-                        archivoFacturas.close();
+//                        archivoFacturas.close();
+                        break;
+                    case 5://Usuario
+                        for (Usuario unUsuario : losUsuarios) {
+                            archivosParaEscribir[i].write(unUsuario.toString());
+                        }
                         break;
                 }
                 archivosParaEscribir[i].close();
@@ -696,5 +783,61 @@ public class GestoraEmpresa {
         }
         return false;
     }
-}
 
+    /**
+     * Comprueba que los datos de acceso sean correctos
+     *
+     * @param usuario
+     * @param clave
+     * @return
+     */
+    public boolean comprobarUsuario(String usuario, String clave) {
+        try {
+            int lugar = lugarDniUsuario(usuario);
+
+            Usuario usuarioAcceso = losUsuarios.get(lugar);
+            String dniUsuario = usuarioAcceso.getUsuario();
+            String claveUsuario = usuarioAcceso.getClave();
+            if (usuario.equalsIgnoreCase(dniUsuario)) {
+                if (clave.equals(claveUsuario)) {
+                    return true;
+                }
+            }
+        } catch (NullPointerException err1) {
+            Mensajes.mensajesDeError("ACCESO_INCORRECTO");
+        } catch (ArrayIndexOutOfBoundsException err2) {
+            Mensajes.mensajesDeError("ACCESO_INCORRECTO");
+        }
+        return false;
+    }
+
+    public boolean comprobarPrivilegios(String usuario) {
+        int lugar = lugarDniUsuario(usuario);
+        Usuario usuarioAcceso = losUsuarios.get(lugar);
+        boolean privilegio = usuarioAcceso.isPrivilegios();
+        return privilegio;
+    }
+
+    private int lugarDniUsuario(String usuario) {
+        try {
+            ArrayList<String> dniUsuarios = new ArrayList();
+
+            for (Usuario unUsuario : losUsuarios) {
+                dniUsuarios.add(unUsuario.getUsuario());
+            }
+            int lugar = -1;
+            int i = 0;
+            for (String elDni : dniUsuarios) {
+                if (elDni.equals(usuario)) {
+                    lugar = i;
+                    break;
+                }
+                i++;
+            }
+            return lugar;
+        } catch (NullPointerException err1) {
+
+        }
+        return 0;
+    }
+}

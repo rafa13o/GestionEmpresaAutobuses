@@ -73,6 +73,12 @@ public class Mensajes {
                 mensaje = "No se ha podido dar de baja ningún autobús";
                 mensaje2 = "Por favor, revise que ha seleccionado al menos uno e inténtelo de nuevo";
                 break;
+            case "CLAVES_DISTINTAS":
+                mensaje = "Las contraseñas no son iguales";
+                break;
+            case "ACCESO_INCORRECTO":
+                mensaje = "El usuario o la contraseña son incorrectos";
+                break;
         }
         JOptionPane.showMessageDialog(null, mensaje + ".\n"
                 + mensaje2, "Error - GESTIÓN DE EMPRESA ©", 0);

@@ -9,6 +9,7 @@ import ModeloTablas.ModeloTrabajador;
 import ModeloTablas.ModeloCliente;
 import ModeloTablas.ModeloRuta;
 import ModeloTablas.ModeloFactura;
+import ModeloTablas.ModeloUsuario;
 import Principal.GestoraEmpresa;
 import Principal.ModeloAutobuses;
 import Principal.Mensajes;
@@ -26,8 +27,14 @@ import java.util.ArrayList;
  */
 public class VentanaBajas extends javax.swing.JFrame {
 
+    VentanaAcceso ventanaAcceso = new VentanaAcceso();
     GestoraEmpresa laGestora = new GestoraEmpresa();
     boolean filtrar = false;
+
+    ModeloTrabajador moTrab = new ModeloTrabajador(laGestora.getLosTrabajadores());
+
+    String fabricante = "TODOS";
+    ModeloAutobuses moAuto = new ModeloAutobuses(laGestora.getLosAutobuses(fabricante));
 
     /**
      * Creates new form VentanaBajas
@@ -52,6 +59,7 @@ public class VentanaBajas extends javax.swing.JFrame {
      */
     public void mostrarBotonCerrarVentana(boolean caso) {
         b_cerrarVentana.setVisible(caso);
+        b_menu.setEnabled(!caso);
     }
 
     /**
@@ -76,7 +84,6 @@ public class VentanaBajas extends javax.swing.JFrame {
         b_bajaAutobus = new javax.swing.JButton();
         cb_fabricanteCarroceria = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        b_filtrarBuses = new javax.swing.JButton();
         p_cliente = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         t_cliente = new javax.swing.JTable();
@@ -86,6 +93,10 @@ public class VentanaBajas extends javax.swing.JFrame {
         p_factura = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         t_factura = new javax.swing.JTable();
+        p_usuarios = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        t_usuarios = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
         b_menu = new javax.swing.JButton();
         b_salir = new javax.swing.JButton();
         b_cerrarVentana = new javax.swing.JButton();
@@ -93,6 +104,9 @@ public class VentanaBajas extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Información – GESTIÓN DE EMPRESA ©");
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -167,29 +181,25 @@ public class VentanaBajas extends javax.swing.JFrame {
         });
 
         cb_fabricanteCarroceria.setModel(new DefaultComboBoxModel(laGestora.getLosFabricantes()));
-
-        jLabel1.setText("FABRICANTE (CARROCERÍA): ");
-
-        b_filtrarBuses.setText("FILTRAR");
-        b_filtrarBuses.addActionListener(new java.awt.event.ActionListener() {
+        cb_fabricanteCarroceria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                b_filtrarBusesActionPerformed(evt);
+                cb_fabricanteCarroceriaActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("FABRICANTE (CARROCERÍA): ");
 
         javax.swing.GroupLayout p_autobusLayout = new javax.swing.GroupLayout(p_autobus);
         p_autobus.setLayout(p_autobusLayout);
         p_autobusLayout.setHorizontalGroup(
             p_autobusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
             .addGroup(p_autobusLayout.createSequentialGroup()
-                .addGap(89, 89, 89)
+                .addGap(129, 129, 129)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(cb_fabricanteCarroceria, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(b_filtrarBuses)
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addComponent(cb_fabricanteCarroceria, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p_autobusLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(b_bajaAutobus)
@@ -201,10 +211,9 @@ public class VentanaBajas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(p_autobusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cb_fabricanteCarroceria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(b_filtrarBuses))
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(b_bajaAutobus)
                 .addGap(19, 19, 19))
@@ -290,6 +299,42 @@ public class VentanaBajas extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("-- FACTURA --", p_factura);
 
+        t_usuarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane6.setViewportView(t_usuarios);
+
+        jButton1.setText("DAR DE BAJA USUARIO/S SELECCIONADO/S");
+
+        javax.swing.GroupLayout p_usuariosLayout = new javax.swing.GroupLayout(p_usuarios);
+        p_usuarios.setLayout(p_usuariosLayout);
+        p_usuariosLayout.setHorizontalGroup(
+            p_usuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
+            .addGroup(p_usuariosLayout.createSequentialGroup()
+                .addGap(171, 171, 171)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        p_usuariosLayout.setVerticalGroup(
+            p_usuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(p_usuariosLayout.createSequentialGroup()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(0, 32, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("-- USUARIO --", p_usuarios);
+
         b_menu.setText("<-- VOLVER A MENÚ");
         b_menu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -326,7 +371,7 @@ public class VentanaBajas extends javax.swing.JFrame {
                         .addGap(87, 87, 87)
                         .addComponent(b_salir)))
                 .addContainerGap())
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         p_principalLayout.setVerticalGroup(
             p_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -379,14 +424,13 @@ public class VentanaBajas extends javax.swing.JFrame {
     }//GEN-LAST:event_b_cerrarVentanaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+
         //---TABLA TRABAJADOR
-        ModeloTrabajador moTrab = new ModeloTrabajador(laGestora.getLosTrabajadores());
         t_trabajador.setModel(moTrab);
         TableRowSorter<ModeloTrabajador> ordenarTrabajadores = new TableRowSorter(moTrab);
         t_trabajador.setRowSorter(ordenarTrabajadores);
 
         //---TABLA AUTOBUSES
-        ModeloAutobuses moAuto = new ModeloAutobuses(laGestora.getLosAutobuses("TODOS"));
         t_autobus.setModel(moAuto);
         /*TableRowSorter<ModeloAutobuses> ordenarBuses = new TableRowSorter(moAuto);
         t_autobus.setRowSorter(ordenarBuses);*/
@@ -408,13 +452,13 @@ public class VentanaBajas extends javax.swing.JFrame {
         t_factura.setModel(moFac);
         TableRowSorter<ModeloFactura> ordenarFacturas = new TableRowSorter(moFac);
         t_factura.setRowSorter(ordenarFacturas);
-    }//GEN-LAST:event_formWindowOpened
 
-    private void b_filtrarBusesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_filtrarBusesActionPerformed
-        String fabricante = cb_fabricanteCarroceria.getItemAt(cb_fabricanteCarroceria.getSelectedIndex());
-        ModeloAutobuses moAuto = new ModeloAutobuses(laGestora.getLosAutobuses(fabricante));
-        t_autobus.setModel(moAuto);
-    }//GEN-LAST:event_b_filtrarBusesActionPerformed
+        //--TABLA USUARIOS
+        ModeloUsuario moUsu = new ModeloUsuario(laGestora.getLosUsuarios());
+        t_usuarios.setModel(moUsu);
+        TableRowSorter<ModeloUsuario> ordenarUsuarios = new TableRowSorter(moUsu);
+        t_usuarios.setRowSorter(ordenarUsuarios);
+    }//GEN-LAST:event_formWindowOpened
 
     private void b_bajaAutobusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_bajaAutobusActionPerformed
         darBajaAutobus();
@@ -423,6 +467,16 @@ public class VentanaBajas extends javax.swing.JFrame {
     private void b_bajaTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_bajaTrabajadorActionPerformed
         darBajaTrabajador();
     }//GEN-LAST:event_b_bajaTrabajadorActionPerformed
+
+    private void cb_fabricanteCarroceriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_fabricanteCarroceriaActionPerformed
+        fabricante = cb_fabricanteCarroceria.getItemAt(cb_fabricanteCarroceria.getSelectedIndex());
+        ModeloAutobuses moAuto = new ModeloAutobuses(laGestora.getLosAutobuses(fabricante));
+        t_autobus.setModel(moAuto);
+    }//GEN-LAST:event_cb_fabricanteCarroceriaActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        p_usuarios.setVisible(ventanaAcceso.getPrivilegios());
+    }//GEN-LAST:event_formWindowActivated
 
     private void darBajaTrabajador() {
         try {
@@ -444,6 +498,8 @@ public class VentanaBajas extends javax.swing.JFrame {
                     Mensajes.mensajesDeResultado("TRABAJADOR2");
                     ejecutarAlBorrarDatos();
                 }
+                moTrab.setElTrabajador(laGestora.getLosTrabajadores());
+                t_trabajador.setModel(moTrab);
             } else {
                 Mensajes.mensajesDeError("BAJA_TRABAJADOR");
             }
@@ -475,7 +531,8 @@ public class VentanaBajas extends javax.swing.JFrame {
                     Mensajes.mensajesDeResultado("AUTOBUS2");
                     ejecutarAlBorrarDatos();
                 }
-
+                moAuto.setElAutobus(laGestora.getLosAutobuses(fabricante));
+                t_autobus.setModel(moAuto);
             } else {
                 Mensajes.mensajesDeError("BAJA_AUTOBUS");
             }
@@ -528,16 +585,17 @@ public class VentanaBajas extends javax.swing.JFrame {
     private javax.swing.JButton b_bajaAutobus;
     private javax.swing.JButton b_bajaTrabajador;
     private javax.swing.JButton b_cerrarVentana;
-    private javax.swing.JButton b_filtrarBuses;
     private javax.swing.JButton b_menu;
     private javax.swing.JButton b_salir;
     private javax.swing.JComboBox<String> cb_fabricanteCarroceria;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JPanel p_autobus;
@@ -546,10 +604,12 @@ public class VentanaBajas extends javax.swing.JFrame {
     private javax.swing.JPanel p_principal;
     private javax.swing.JPanel p_ruta;
     private javax.swing.JPanel p_trabajador;
+    private javax.swing.JPanel p_usuarios;
     private javax.swing.JTable t_autobus;
     private javax.swing.JTable t_cliente;
     private javax.swing.JTable t_factura;
     private javax.swing.JTable t_ruta;
     private javax.swing.JTable t_trabajador;
+    private javax.swing.JTable t_usuarios;
     // End of variables declaration//GEN-END:variables
 }

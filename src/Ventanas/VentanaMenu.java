@@ -124,7 +124,7 @@ public class VentanaMenu extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         VentanaAcceso elAcceso = new VentanaAcceso();
-        e_bienvenida.setText("Bienvenido, "+elAcceso.nombre+". ¿Qué desea hacer?");
+        e_bienvenida.setText("Bienvenido, "+". ¿Qué desea hacer?");
     }//GEN-LAST:event_formWindowOpened
 
     private void b_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_salirActionPerformed

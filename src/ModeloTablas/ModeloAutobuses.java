@@ -68,6 +68,8 @@ public class ModeloAutobuses extends AbstractTableModel {
         return this.columnas.length;
     }
     
-    
+    public void setElAutobus(Autobus[] elAutobus) {
+        this.elAutobus = elAutobus;
+    }
 
 }

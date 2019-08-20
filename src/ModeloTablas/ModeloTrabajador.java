@@ -14,12 +14,12 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ModeloTrabajador extends AbstractTableModel{
     
-    Trabajador[] elTrabajor;
+    Trabajador[] elTrabajador;
     String[] columnas = {"DNI", "NOMBRE Y APELLIDOS", "AÑO DE INGRESO", "SECCIÓN"};
     Class[] tipos = {String.class, String.class, Integer.class, String.class};
 
-    public ModeloTrabajador(Trabajador[] elTrabajor) {
-        this.elTrabajor = elTrabajor;
+    public ModeloTrabajador(Trabajador[] elTrabajador) {
+        this.elTrabajador = elTrabajador;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class ModeloTrabajador extends AbstractTableModel{
 
     @Override
     public int getRowCount() {
-        return this.elTrabajor == null ? 0 : this.elTrabajor.length;
+        return this.elTrabajador == null ? 0 : this.elTrabajador.length;
     }
 
     @Override
@@ -51,15 +51,19 @@ public class ModeloTrabajador extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch(columnIndex){
             case 0:
-                return elTrabajor[rowIndex].getDni();
+                return elTrabajador[rowIndex].getDni();
             case 1:
-                return elTrabajor[rowIndex].getNombreApellidos();
+                return elTrabajador[rowIndex].getNombreApellidos();
             case 2:
-                return elTrabajor[rowIndex].getAnioIngreso();
+                return elTrabajador[rowIndex].getAnioIngreso();
             case 3:
-                return elTrabajor[rowIndex].getSeccion();
+                return elTrabajador[rowIndex].getSeccion();
         }
         return null;
+    }
+    
+    public void setElTrabajador(Trabajador[] elTrabajador) {
+        this.elTrabajador = elTrabajador;
     }
     
 }

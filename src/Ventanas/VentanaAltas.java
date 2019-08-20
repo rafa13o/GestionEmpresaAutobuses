@@ -14,6 +14,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import Principal.Mensajes;
+import javafx.scene.control.CheckBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -22,6 +23,8 @@ import javax.swing.JTextField;
  * @author NEWASUSOJO2
  */
 public class VentanaAltas extends javax.swing.JFrame {
+
+    VentanaAcceso ventanaAcceso = new VentanaAcceso();
 
     /**
      * Creates new form VentanaAltas
@@ -112,9 +115,25 @@ public class VentanaAltas extends javax.swing.JFrame {
         b_limpiarFactura = new javax.swing.JButton();
         b_guardarFactura = new javax.swing.JButton();
         b_ventanaInforfactura = new javax.swing.JButton();
+        p_usuario = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        cb_trabajadores = new javax.swing.JComboBox<>();
+        ct_clave1 = new javax.swing.JPasswordField();
+        jLabel9 = new javax.swing.JLabel();
+        ct_clave2 = new javax.swing.JPasswordField();
+        b_limpiarUsuario = new javax.swing.JButton();
+        b_ventanaInforUsuario = new javax.swing.JButton();
+        b_guardarUsuario = new javax.swing.JButton();
+        b_privilegios = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Altas – GESTIÓN DE EMPRESA ©");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
@@ -624,6 +643,101 @@ public class VentanaAltas extends javax.swing.JFrame {
 
         jTabbedPane7.addTab("-- FACTURA --", p_factura);
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setText("NIF DEL USUARIO:");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setText("CLAVE DEL USUARIO:");
+
+        cb_trabajadores.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cb_trabajadores.setModel(new DefaultComboBoxModel(laGestora.getLosDNIdeDireccion()));
+
+        ct_clave1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setText("CONFIRMAR CLAVE:");
+
+        ct_clave2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        b_limpiarUsuario.setText("LIMPIAR");
+        b_limpiarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_limpiarUsuarioActionPerformed(evt);
+            }
+        });
+
+        b_ventanaInforUsuario.setText("ABRIR VENTANA DE INFORMACIÓN");
+        b_ventanaInforUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_ventanaInforUsuarioActionPerformed(evt);
+            }
+        });
+
+        b_guardarUsuario.setText("GUARDAR");
+        b_guardarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_guardarUsuarioActionPerformed(evt);
+            }
+        });
+
+        b_privilegios.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        b_privilegios.setText("PRIVILEGIOS DE ADMINISTRADOR");
+
+        javax.swing.GroupLayout p_usuarioLayout = new javax.swing.GroupLayout(p_usuario);
+        p_usuario.setLayout(p_usuarioLayout);
+        p_usuarioLayout.setHorizontalGroup(
+            p_usuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(p_usuarioLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(b_limpiarUsuario)
+                .addGap(81, 81, 81)
+                .addComponent(b_ventanaInforUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addComponent(b_guardarUsuario)
+                .addGap(42, 42, 42))
+            .addGroup(p_usuarioLayout.createSequentialGroup()
+                .addGap(109, 109, 109)
+                .addGroup(p_usuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(b_privilegios)
+                    .addGroup(p_usuarioLayout.createSequentialGroup()
+                        .addGroup(p_usuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9))
+                        .addGap(73, 73, 73)
+                        .addGroup(p_usuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ct_clave1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cb_trabajadores, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ct_clave2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        p_usuarioLayout.setVerticalGroup(
+            p_usuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(p_usuarioLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(p_usuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(cb_trabajadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(p_usuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(ct_clave1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(p_usuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel9)
+                    .addComponent(ct_clave2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(b_privilegios)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addGroup(p_usuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(b_limpiarUsuario)
+                    .addComponent(b_ventanaInforUsuario)
+                    .addComponent(b_guardarUsuario))
+                .addGap(57, 57, 57))
+        );
+
+        jTabbedPane7.addTab("-- USUARIO --", p_usuario);
+
         javax.swing.GroupLayout p_principalLayout = new javax.swing.GroupLayout(p_principal);
         p_principal.setLayout(p_principalLayout);
         p_principalLayout.setHorizontalGroup(
@@ -722,6 +836,23 @@ public class VentanaAltas extends javax.swing.JFrame {
     private void b_guardarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_guardarFacturaActionPerformed
         guardarFactura();
     }//GEN-LAST:event_b_guardarFacturaActionPerformed
+
+    private void b_ventanaInforUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_ventanaInforUsuarioActionPerformed
+        abrirVentanaInformacion();
+    }//GEN-LAST:event_b_ventanaInforUsuarioActionPerformed
+
+    private void b_limpiarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_limpiarUsuarioActionPerformed
+        limpiar(p_usuario);
+        b_privilegios.setSelected(false);
+    }//GEN-LAST:event_b_limpiarUsuarioActionPerformed
+
+    private void b_guardarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_guardarUsuarioActionPerformed
+        guardarUsuario();
+    }//GEN-LAST:event_b_guardarUsuarioActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        p_usuario.setVisible(ventanaAcceso.getPrivilegios());
+    }//GEN-LAST:event_formWindowOpened
 
     private void guardarTrabajador() throws HeadlessException {
         try {
@@ -832,6 +963,21 @@ public class VentanaAltas extends javax.swing.JFrame {
 
     }
 
+    private void guardarUsuario() {
+        String usuario = cb_trabajadores.getItemAt(cb_trabajadores.getSelectedIndex());
+        String clave1 = new String(ct_clave1.getPassword());
+        String clave2 = new String(ct_clave2.getPassword());
+        boolean privilegios = b_privilegios.isSelected();
+        if (clave1.equals(clave2)) {
+            if (laGestora.nuevoUsuario(usuario, clave1, privilegios) == true) {
+                limpiar(p_usuario);
+                escribirArchivos();
+            }
+        } else {
+            Mensajes.mensajesDeError("CLAVES_DISTINTAS");
+        }
+    }
+
     private String generarCodigoRuta(String inicio, String fin, String kilometros) {
         while (kilometros.length() < 5) {
             kilometros = 0 + kilometros;
@@ -908,14 +1054,18 @@ public class VentanaAltas extends javax.swing.JFrame {
     private javax.swing.JButton b_guardarFactura;
     private javax.swing.JButton b_guardarRuta;
     private javax.swing.JButton b_guardarTrabajador;
+    private javax.swing.JButton b_guardarUsuario;
     private javax.swing.JButton b_limpiarAutobus;
     private javax.swing.JButton b_limpiarCliente;
     private javax.swing.JButton b_limpiarFactura;
     private javax.swing.JButton b_limpiarRuta;
     private javax.swing.JButton b_limpiarTrabajador;
+    private javax.swing.JButton b_limpiarUsuario;
     private javax.swing.JButton b_menu;
+    private javax.swing.JCheckBox b_privilegios;
     private javax.swing.JButton b_salir;
     private javax.swing.JButton b_ventanaInforRuta;
+    private javax.swing.JButton b_ventanaInforUsuario;
     private javax.swing.JButton b_ventanaInforfactura;
     private javax.swing.JComboBox<String> cb_autobusRuta;
     private javax.swing.JComboBox<String> cb_clienteFactura;
@@ -923,8 +1073,11 @@ public class VentanaAltas extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_conductorRuta;
     private javax.swing.JComboBox<String> cb_rutaFactura;
     private javax.swing.JComboBox<String> cb_seccion;
+    private javax.swing.JComboBox<String> cb_trabajadores;
     private javax.swing.JTextField ct_anioIngreso;
     private javax.swing.JTextField ct_apellidosTrabajador;
+    private javax.swing.JPasswordField ct_clave1;
+    private javax.swing.JPasswordField ct_clave2;
     private javax.swing.JTextField ct_dni;
     private javax.swing.JTextField ct_fabricante;
     private javax.swing.JTextField ct_finRuta;
@@ -959,8 +1112,11 @@ public class VentanaAltas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JTabbedPane jTabbedPane7;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JPanel p_autobus;
@@ -969,5 +1125,6 @@ public class VentanaAltas extends javax.swing.JFrame {
     private javax.swing.JPanel p_principal;
     private javax.swing.JPanel p_ruta;
     private javax.swing.JPanel p_trabajador;
+    private javax.swing.JPanel p_usuario;
     // End of variables declaration//GEN-END:variables
 }
