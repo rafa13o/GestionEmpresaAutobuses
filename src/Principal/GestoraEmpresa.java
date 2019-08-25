@@ -811,12 +811,6 @@ public class GestoraEmpresa {
         return false;
     }
 
-    public boolean comprobarPrivilegios(String usuario) {
-        int lugar = lugarDniUsuario(usuario);
-        Usuario usuarioAcceso = losUsuarios.get(lugar);
-        boolean privilegio = usuarioAcceso.isPrivilegios();
-        return privilegio;
-    }
 
     private int lugarDniUsuario(String usuario) {
         try {

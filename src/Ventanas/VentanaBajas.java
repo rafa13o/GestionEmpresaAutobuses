@@ -475,7 +475,7 @@ public class VentanaBajas extends javax.swing.JFrame {
     }//GEN-LAST:event_cb_fabricanteCarroceriaActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        p_usuarios.setVisible(ventanaAcceso.getPrivilegios());
+
     }//GEN-LAST:event_formWindowActivated
 
     private void darBajaTrabajador() {

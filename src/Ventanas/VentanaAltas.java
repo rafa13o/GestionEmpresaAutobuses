@@ -851,7 +851,7 @@ public class VentanaAltas extends javax.swing.JFrame {
     }//GEN-LAST:event_b_guardarUsuarioActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        p_usuario.setVisible(ventanaAcceso.getPrivilegios());
+
     }//GEN-LAST:event_formWindowOpened
 
     private void guardarTrabajador() throws HeadlessException {

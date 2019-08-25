@@ -17,7 +17,6 @@ import javax.swing.JOptionPane;
 public class VentanaAcceso extends javax.swing.JFrame {
 
     GestoraEmpresa laGestora = new GestoraEmpresa();
-    public boolean privilegios;
 
     /**
      * Creates new form VentanaMenu
@@ -142,15 +141,11 @@ public class VentanaAcceso extends javax.swing.JFrame {
 
         if (laGestora.comprobarUsuario(usu, passwd) == true) {
             VentanaMenu elMenu = new VentanaMenu();
-            privilegios = laGestora.comprobarPrivilegios(usu);
             this.setVisible(false);
             elMenu.setVisible(true);
         }
 
     }//GEN-LAST:event_b_accederActionPerformed
-    public boolean getPrivilegios() {
-        return privilegios;
-    }
 
     /**
      * @param args the command line arguments
