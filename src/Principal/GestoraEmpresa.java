@@ -204,7 +204,6 @@ public class GestoraEmpresa {
      *
      * @param usuario
      * @param clave
-     * @param privilegios
      * @return
      */
     public boolean nuevoUsuario(String usuario, String clave) {
