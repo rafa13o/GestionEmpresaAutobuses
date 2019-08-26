@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.regex.Pattern;
 
 /**
@@ -35,7 +37,7 @@ public class GestoraEmpresa {
     ArrayList<Ruta> lasRutas = new ArrayList();
     ArrayList<Cliente> losClientes = new ArrayList();
     ArrayList<Factura> lasFacturas = new ArrayList();
-    ArrayList<Usuario> losUsuarios = new ArrayList();
+    Map<String, String> losUsuarios = new TreeMap<>();
     EnumSecciones[] lasSecciones = EnumSecciones.values();
     EnumCombustible[] losCombustibles = EnumCombustible.values();
 
@@ -205,7 +207,7 @@ public class GestoraEmpresa {
      * @param privilegios
      * @return
      */
-    public boolean nuevoUsuario(String usuario, String clave, boolean privilegios) {
+    public boolean nuevoUsuario(String usuario, String clave) {
         try {
             String[] dnis = getTodosLosDNI();
             int lugar = -1;
@@ -220,8 +222,9 @@ public class GestoraEmpresa {
             int coma = nombreApellidos.indexOf(",");
             String nombre = nombreApellidos.substring(coma + 2);
 
-            elUsuario = new Usuario(usuario, nombre, clave, privilegios);
-            losUsuarios.add(elUsuario);
+            elUsuario = new Usuario(usuario, clave);
+            losUsuarios.put(usuario, clave);
+
             return true;
         } catch (NullPointerException err1) {
 
@@ -421,15 +424,17 @@ public class GestoraEmpresa {
     }
 
     /**
-     * Devuelve el nombre del usuario que ha accedido a la plataforma
      *
      * @param usuario
      * @return
      */
-    public String getElNombreDelUsuario(String usuario) {
-        Usuario usuarioAcceso = losUsuarios.get(losUsuarios.indexOf(usuario));
-        String nombre = usuarioAcceso.getNombre();
-        return nombre;
+    public String getLaClaveUsuario(String usuario) {
+        try {
+            return losUsuarios.get(usuario);
+        } catch (NullPointerException err1) {
+
+        }
+        return null;
     }
 
     //ELIMINACIÓN DE DATOS*******************************************************************************************************
@@ -507,6 +512,42 @@ public class GestoraEmpresa {
                     losAutobuses.add(todosLosAutobuses.get(rm));
                 }
             }
+            return true;
+        } catch (NullPointerException err1) {
+
+        }
+        return false;
+    }
+
+    /**
+     * Elimina el usuario seleccionado en el comboBox
+     *
+     * @param usuario
+     * @return
+     */
+    public boolean eliminarUsuario(String usuario) {
+        try {
+            losUsuarios.remove(usuario);
+            return true;
+        } catch (NullPointerException err1) {
+
+        }
+        return false;
+    }
+
+    //MODIFICACIÓN DE DATOS******************************************************************************************************
+    /**
+     * Cambia la contraseña del usuario seleccionado en el comboBox
+     *
+     * @param usuario
+     * @param clave
+     * @return
+     */
+    public boolean cambiarUsuario(String usuario, String clave) {
+        try {
+            String claveAntigua = losUsuarios.get(usuario);
+            losUsuarios.replace(usuario, claveAntigua, clave);
+            escribirArchivos();
             return true;
         } catch (NullPointerException err1) {
 
@@ -619,11 +660,20 @@ public class GestoraEmpresa {
         return null;
     }
 
-    public Usuario[] getLosUsuarios() {
-        Usuario[] usuarios = new Usuario[losUsuarios.size()];
+    public String[] getLosUsuarios() {
         try {
-            for (int i = 0; i < usuarios.length; i++) {
-                usuarios[i] = losUsuarios.get(i);
+            String[] usuarios = new String[(losUsuarios.size()) * 2];
+            String elMapa = losUsuarios.toString();
+            elMapa = elMapa.substring(1, elMapa.length() - 1);
+            String[] intermedio = elMapa.split(", ");
+            int n = 0;
+            for (int i = 0; i < losUsuarios.size(); i++) {
+                String usuario = intermedio[i].substring(0, 9);
+                String dni = intermedio[i].substring(10);
+                usuarios[n] = usuario;
+                n++;
+                usuarios[n] = dni;
+                n++;
             }
             return usuarios;
         } catch (NullPointerException err1) {
@@ -680,8 +730,7 @@ public class GestoraEmpresa {
                             lasFacturas.add(laFactura);
                             break;
                         case 5://Usuarios
-                            elUsuario = new Usuario(datos[0], datos[1], datos[2], Boolean.parseBoolean(datos[3]));
-                            losUsuarios.add(elUsuario);
+                            losUsuarios.put(datos[0], datos[1]);
                             break;
                     }
                 }
@@ -744,11 +793,12 @@ public class GestoraEmpresa {
                         for (Factura unaFactura : lasFacturas) {
                             archivosParaEscribir[i].write(unaFactura.toString());
                         }
-//                        archivoFacturas.close();
                         break;
                     case 5://Usuario
-                        for (Usuario unUsuario : losUsuarios) {
-                            archivosParaEscribir[i].write(unUsuario.toString());
+                        for (int n = 0; n < getLosUsuarios().length; n++) {
+                            archivosParaEscribir[i].write(getLosUsuarios()[n] + ";");
+                            n++;
+                            archivosParaEscribir[i].write(getLosUsuarios()[n] + "\n");
                         }
                         break;
                 }
@@ -793,15 +843,15 @@ public class GestoraEmpresa {
      */
     public boolean comprobarUsuario(String usuario, String clave) {
         try {
-            int lugar = lugarDniUsuario(usuario);
-
-            Usuario usuarioAcceso = losUsuarios.get(lugar);
-            String dniUsuario = usuarioAcceso.getUsuario();
-            String claveUsuario = usuarioAcceso.getClave();
-            if (usuario.equalsIgnoreCase(dniUsuario)) {
-                if (clave.equals(claveUsuario)) {
+            if (losUsuarios.containsKey(usuario)) {
+                String claveUsuario = losUsuarios.get(usuario);
+                if (claveUsuario.equals(clave)) {
                     return true;
+                } else {
+                    Mensajes.mensajesDeError("ACCESO_INCORRECTO");
                 }
+            } else {
+                Mensajes.mensajesDeError("USUARIO_INEXISTENTE");
             }
         } catch (NullPointerException err1) {
             Mensajes.mensajesDeError("ACCESO_INCORRECTO");
@@ -811,27 +861,4 @@ public class GestoraEmpresa {
         return false;
     }
 
-
-    private int lugarDniUsuario(String usuario) {
-        try {
-            ArrayList<String> dniUsuarios = new ArrayList();
-
-            for (Usuario unUsuario : losUsuarios) {
-                dniUsuarios.add(unUsuario.getUsuario());
-            }
-            int lugar = -1;
-            int i = 0;
-            for (String elDni : dniUsuarios) {
-                if (elDni.equals(usuario)) {
-                    lugar = i;
-                    break;
-                }
-                i++;
-            }
-            return lugar;
-        } catch (NullPointerException err1) {
-
-        }
-        return 0;
-    }
 }

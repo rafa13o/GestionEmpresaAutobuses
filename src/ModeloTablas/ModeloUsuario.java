@@ -15,8 +15,8 @@ import javax.swing.table.AbstractTableModel;
 public class ModeloUsuario extends AbstractTableModel {
 
     Usuario[] elUsuario;
-    String[] columnas = {"USUARIO", "NOMBRE", "CLAVE", "PRIVILEGIOS"};
-    Class[] tipos = {String.class, String.class, String.class, boolean.class};
+    String[] columnas = {"USUARIO",  "CLAVE"};
+    Class[] tipos = {String.class, String.class};
 
     public ModeloUsuario(Usuario[] elUsuario) {
         this.elUsuario = elUsuario;
@@ -46,13 +46,9 @@ public class ModeloUsuario extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return elUsuario[rowIndex].getUsuario();
+                return elUsuario[rowIndex].getDniAccesoUsuario();
             case 1:
-                return elUsuario[rowIndex].getNombre();
-            case 2:
                 return elUsuario[rowIndex].getClave();
-            case 3: 
-                return elUsuario[rowIndex].isPrivilegios();
         }
         return null;
     }

@@ -125,7 +125,6 @@ public class VentanaAltas extends javax.swing.JFrame {
         b_limpiarUsuario = new javax.swing.JButton();
         b_ventanaInforUsuario = new javax.swing.JButton();
         b_guardarUsuario = new javax.swing.JButton();
-        b_privilegios = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Altas – GESTIÓN DE EMPRESA ©");
@@ -680,9 +679,6 @@ public class VentanaAltas extends javax.swing.JFrame {
             }
         });
 
-        b_privilegios.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        b_privilegios.setText("PRIVILEGIOS DE ADMINISTRADOR");
-
         javax.swing.GroupLayout p_usuarioLayout = new javax.swing.GroupLayout(p_usuario);
         p_usuario.setLayout(p_usuarioLayout);
         p_usuarioLayout.setHorizontalGroup(
@@ -697,18 +693,15 @@ public class VentanaAltas extends javax.swing.JFrame {
                 .addGap(42, 42, 42))
             .addGroup(p_usuarioLayout.createSequentialGroup()
                 .addGap(109, 109, 109)
-                .addGroup(p_usuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(b_privilegios)
-                    .addGroup(p_usuarioLayout.createSequentialGroup()
-                        .addGroup(p_usuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9))
-                        .addGap(73, 73, 73)
-                        .addGroup(p_usuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ct_clave1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cb_trabajadores, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ct_clave2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(p_usuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9))
+                .addGap(73, 73, 73)
+                .addGroup(p_usuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ct_clave1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_trabajadores, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ct_clave2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         p_usuarioLayout.setVerticalGroup(
@@ -726,9 +719,7 @@ public class VentanaAltas extends javax.swing.JFrame {
                 .addGroup(p_usuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel9)
                     .addComponent(ct_clave2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(b_privilegios)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                 .addGroup(p_usuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(b_limpiarUsuario)
                     .addComponent(b_ventanaInforUsuario)
@@ -843,7 +834,6 @@ public class VentanaAltas extends javax.swing.JFrame {
 
     private void b_limpiarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_limpiarUsuarioActionPerformed
         limpiar(p_usuario);
-        b_privilegios.setSelected(false);
     }//GEN-LAST:event_b_limpiarUsuarioActionPerformed
 
     private void b_guardarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_guardarUsuarioActionPerformed
@@ -967,9 +957,8 @@ public class VentanaAltas extends javax.swing.JFrame {
         String usuario = cb_trabajadores.getItemAt(cb_trabajadores.getSelectedIndex());
         String clave1 = new String(ct_clave1.getPassword());
         String clave2 = new String(ct_clave2.getPassword());
-        boolean privilegios = b_privilegios.isSelected();
         if (clave1.equals(clave2)) {
-            if (laGestora.nuevoUsuario(usuario, clave1, privilegios) == true) {
+            if (laGestora.nuevoUsuario(usuario, clave1) == true) {
                 limpiar(p_usuario);
                 escribirArchivos();
             }
@@ -1062,7 +1051,6 @@ public class VentanaAltas extends javax.swing.JFrame {
     private javax.swing.JButton b_limpiarTrabajador;
     private javax.swing.JButton b_limpiarUsuario;
     private javax.swing.JButton b_menu;
-    private javax.swing.JCheckBox b_privilegios;
     private javax.swing.JButton b_salir;
     private javax.swing.JButton b_ventanaInforRuta;
     private javax.swing.JButton b_ventanaInforUsuario;

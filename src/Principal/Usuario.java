@@ -11,32 +11,20 @@ package Principal;
  */
 public class Usuario {
 
-    String nombre; //Nombre del usuario que puede utilizar el servicio
-    String usuario; //Nombre de usuario para el acceso
+    String dniAccesoUsuario; //Nombre de dniAccesoUsuario para el acceso
     String clave; //Clave de acceso
-    boolean privilegios; //Privilegios para crear o borrar usuarios
 
-    public Usuario(String nombre, String usuario, String clave, boolean privilegios) {
-        this.nombre = nombre;
-        this.usuario = usuario;
+    public Usuario( String usuario, String clave) {
+        this.dniAccesoUsuario = usuario;
         this.clave = clave;
-        this.privilegios = privilegios;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getDniAccesoUsuario() {
+        return dniAccesoUsuario;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setDniAccesoUsuario(String dniAccesoUsuario) {
+        this.dniAccesoUsuario = dniAccesoUsuario;
     }
 
     public String getClave() {
@@ -47,17 +35,9 @@ public class Usuario {
         this.clave = clave;
     }
 
-    public boolean isPrivilegios() {
-        return privilegios;
-    }
-
-    public void setPrivilegios(boolean privilegios) {
-        this.privilegios = privilegios;
-    }
-
     @Override
     public String toString() {
-        return usuario + ";" + nombre + ";" + clave + ";" + privilegios+"\n";
+        return dniAccesoUsuario + ";" + clave +"\n";
     }
 
 }

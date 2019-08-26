@@ -13,6 +13,7 @@ import ModeloTablas.ModeloUsuario;
 import Principal.GestoraEmpresa;
 import Principal.ModeloAutobuses;
 import Principal.Mensajes;
+import java.awt.Component;
 
 import java.awt.Image;
 import javax.swing.DefaultComboBoxModel;
@@ -20,6 +21,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableRowSorter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -94,9 +99,19 @@ public class VentanaBajas extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         t_factura = new javax.swing.JTable();
         p_usuarios = new javax.swing.JPanel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        t_usuarios = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        cb_usuario = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        ct_clave = new javax.swing.JTextField();
+        p_cambiarClaveUsuario = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        ct_clave1 = new javax.swing.JPasswordField();
+        ct_clave2 = new javax.swing.JPasswordField();
+        b_guardarNuevaClave = new javax.swing.JButton();
+        b_limpiarUsuario = new javax.swing.JButton();
+        b_cambiarClave = new javax.swing.JToggleButton();
+        b_eliminarUsuario = new javax.swing.JButton();
         b_menu = new javax.swing.JButton();
         b_salir = new javax.swing.JButton();
         b_cerrarVentana = new javax.swing.JButton();
@@ -152,7 +167,7 @@ public class VentanaBajas extends javax.swing.JFrame {
         p_trabajadorLayout.setVerticalGroup(
             p_trabajadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(p_trabajadorLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(b_bajaTrabajador)
                 .addGap(21, 21, 21))
@@ -213,7 +228,7 @@ public class VentanaBajas extends javax.swing.JFrame {
                     .addComponent(cb_fabricanteCarroceria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(b_bajaAutobus)
                 .addGap(19, 19, 19))
@@ -242,7 +257,7 @@ public class VentanaBajas extends javax.swing.JFrame {
         );
         p_clienteLayout.setVerticalGroup(
             p_clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("-- CLIENTE --", p_cliente);
@@ -268,7 +283,7 @@ public class VentanaBajas extends javax.swing.JFrame {
         );
         p_rutaLayout.setVerticalGroup(
             p_rutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("-- RUTA --", p_ruta);
@@ -294,43 +309,147 @@ public class VentanaBajas extends javax.swing.JFrame {
         );
         p_facturaLayout.setVerticalGroup(
             p_facturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("-- FACTURA --", p_factura);
 
-        t_usuarios.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane6.setViewportView(t_usuarios);
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        jLabel2.setText("USUARIO:");
 
-        jButton1.setText("DAR DE BAJA USUARIO/S SELECCIONADO/S");
+        cb_usuario.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        cb_usuario.setModel(new DefaultComboBoxModel(laGestora.getLosDNIdeDireccion()));
+        cb_usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_usuarioActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        jLabel3.setText("CLAVE:");
+
+        ct_clave.setEditable(false);
+        ct_clave.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        jLabel4.setText("NUEVA CLAVE:");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        jLabel5.setText("REPETIR CLAVE:");
+
+        ct_clave1.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        ct_clave2.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        b_guardarNuevaClave.setText("GUARDAR");
+        b_guardarNuevaClave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_guardarNuevaClaveActionPerformed(evt);
+            }
+        });
+
+        b_limpiarUsuario.setText("LIMPIAR");
+        b_limpiarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_limpiarUsuarioActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout p_cambiarClaveUsuarioLayout = new javax.swing.GroupLayout(p_cambiarClaveUsuario);
+        p_cambiarClaveUsuario.setLayout(p_cambiarClaveUsuarioLayout);
+        p_cambiarClaveUsuarioLayout.setHorizontalGroup(
+            p_cambiarClaveUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(p_cambiarClaveUsuarioLayout.createSequentialGroup()
+                .addGap(132, 132, 132)
+                .addGroup(p_cambiarClaveUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addGap(81, 81, 81)
+                .addGroup(p_cambiarClaveUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ct_clave1)
+                    .addComponent(ct_clave2, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p_cambiarClaveUsuarioLayout.createSequentialGroup()
+                .addGap(114, 114, 114)
+                .addComponent(b_limpiarUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(b_guardarNuevaClave)
+                .addGap(110, 110, 110))
+        );
+        p_cambiarClaveUsuarioLayout.setVerticalGroup(
+            p_cambiarClaveUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(p_cambiarClaveUsuarioLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(p_cambiarClaveUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(ct_clave1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(p_cambiarClaveUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(ct_clave2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(p_cambiarClaveUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(b_guardarNuevaClave)
+                    .addComponent(b_limpiarUsuario))
+                .addContainerGap(53, Short.MAX_VALUE))
+        );
+
+        b_cambiarClave.setText("CAMBIAR CLAVE");
+        b_cambiarClave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_cambiarClaveActionPerformed(evt);
+            }
+        });
+
+        b_eliminarUsuario.setText("ELIMINAR USUARIO");
+        b_eliminarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_eliminarUsuarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout p_usuariosLayout = new javax.swing.GroupLayout(p_usuarios);
         p_usuarios.setLayout(p_usuariosLayout);
         p_usuariosLayout.setHorizontalGroup(
             p_usuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
+            .addComponent(p_cambiarClaveUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(p_usuariosLayout.createSequentialGroup()
-                .addGap(171, 171, 171)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(79, 79, 79)
+                .addGroup(p_usuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(p_usuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel3))
+                    .addGroup(p_usuariosLayout.createSequentialGroup()
+                        .addComponent(b_cambiarClave)
+                        .addGap(21, 21, 21)))
+                .addGroup(p_usuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(p_usuariosLayout.createSequentialGroup()
+                        .addGap(111, 111, 111)
+                        .addGroup(p_usuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cb_usuario, 0, 125, Short.MAX_VALUE)
+                            .addComponent(ct_clave)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p_usuariosLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(b_eliminarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33))))
         );
         p_usuariosLayout.setVerticalGroup(
             p_usuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(p_usuariosLayout.createSequentialGroup()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addGroup(p_usuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(cb_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(0, 32, Short.MAX_VALUE))
+                .addGroup(p_usuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(ct_clave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(p_usuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(b_cambiarClave)
+                    .addComponent(b_eliminarUsuario))
+                .addGap(18, 18, 18)
+                .addComponent(p_cambiarClaveUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("-- USUARIO --", p_usuarios);
@@ -385,7 +504,7 @@ public class VentanaBajas extends javax.swing.JFrame {
                         .addComponent(b_salir)
                         .addComponent(b_cerrarVentana)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -398,9 +517,7 @@ public class VentanaBajas extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(p_principal, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(p_principal, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
         );
 
         pack();
@@ -453,11 +570,6 @@ public class VentanaBajas extends javax.swing.JFrame {
         TableRowSorter<ModeloFactura> ordenarFacturas = new TableRowSorter(moFac);
         t_factura.setRowSorter(ordenarFacturas);
 
-        //--TABLA USUARIOS
-        ModeloUsuario moUsu = new ModeloUsuario(laGestora.getLosUsuarios());
-        t_usuarios.setModel(moUsu);
-        TableRowSorter<ModeloUsuario> ordenarUsuarios = new TableRowSorter(moUsu);
-        t_usuarios.setRowSorter(ordenarUsuarios);
     }//GEN-LAST:event_formWindowOpened
 
     private void b_bajaAutobusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_bajaAutobusActionPerformed
@@ -475,8 +587,33 @@ public class VentanaBajas extends javax.swing.JFrame {
     }//GEN-LAST:event_cb_fabricanteCarroceriaActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-
+        p_cambiarClaveUsuario.setVisible(false);
     }//GEN-LAST:event_formWindowActivated
+
+    private void cb_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_usuarioActionPerformed
+        String usuario = cb_usuario.getItemAt(cb_usuario.getSelectedIndex());
+        ct_clave.setText(laGestora.getLaClaveUsuario(usuario));
+    }//GEN-LAST:event_cb_usuarioActionPerformed
+
+    private void b_cambiarClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_cambiarClaveActionPerformed
+        p_cambiarClaveUsuario.setVisible(b_cambiarClave.isSelected());
+    }//GEN-LAST:event_b_cambiarClaveActionPerformed
+
+    private void b_eliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_eliminarUsuarioActionPerformed
+        darBajaUsuario();
+    }//GEN-LAST:event_b_eliminarUsuarioActionPerformed
+
+    private void b_limpiarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_limpiarUsuarioActionPerformed
+        limpiar(p_cambiarClaveUsuario);
+        limpiar(p_usuarios);
+    }//GEN-LAST:event_b_limpiarUsuarioActionPerformed
+
+    private void b_guardarNuevaClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_guardarNuevaClaveActionPerformed
+        modificarClave();
+        b_cambiarClave.setSelected(false);
+        limpiar(p_cambiarClaveUsuario);
+        limpiar(p_usuarios);
+    }//GEN-LAST:event_b_guardarNuevaClaveActionPerformed
 
     private void darBajaTrabajador() {
         try {
@@ -541,9 +678,54 @@ public class VentanaBajas extends javax.swing.JFrame {
 
         }
     }
+    
+    private void darBajaUsuario(){
+        String usuario = cb_usuario.getItemAt(cb_usuario.getSelectedIndex());
+        if(laGestora.eliminarUsuario(usuario)){
+            Mensajes.mensajesDeResultado("BAJA_USUARIO");
+            ejecutarAlBorrarDatos();
+        }else{
+            Mensajes.mensajesDeError("BAJA_USUARIO");
+        }
+    }
+    
+    private void modificarClave(){
+        String clave1;
+        String clave2;
+        String claveActual;
+        String usuario;
+        usuario = cb_usuario.getItemAt(cb_usuario.getSelectedIndex());
+        claveActual = ct_clave.getText();
+        clave1 = new String(ct_clave1.getPassword());
+        clave2 = new String(ct_clave2.getPassword());
+        if(clave1.equals(clave2)){
+            if(!clave1.equals(claveActual)){
+                laGestora.cambiarUsuario(usuario, clave1);
+                Mensajes.mensajesDeResultado("CLAVE_CAMBIADA");
+            }else{
+                Mensajes.mensajesDeError("CLAVES_IGUALES");
+            }
+        }else{
+            Mensajes.mensajesDeError("CLAVES_DISTINTAS");
+        }
+    }
 
     private void ejecutarAlBorrarDatos() {
         laGestora.escribirArchivos();
+    }
+    
+    private void limpiar(JPanel elPanel) {
+        Component[] losComponentes = elPanel.getComponents();
+        for (Component elComponente : losComponentes) {
+            if (elComponente instanceof JTextField) {
+                JTextField ct = (JTextField) elComponente;
+                ct.setText(null);
+            }
+            if (elComponente instanceof JComboBox) {
+                JComboBox cb = (JComboBox) elComponente;
+                cb.setSelectedIndex(0);
+            }
+        }
     }
 
     /**
@@ -584,21 +766,32 @@ public class VentanaBajas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b_bajaAutobus;
     private javax.swing.JButton b_bajaTrabajador;
+    private javax.swing.JToggleButton b_cambiarClave;
     private javax.swing.JButton b_cerrarVentana;
+    private javax.swing.JButton b_eliminarUsuario;
+    private javax.swing.JButton b_guardarNuevaClave;
+    private javax.swing.JButton b_limpiarUsuario;
     private javax.swing.JButton b_menu;
     private javax.swing.JButton b_salir;
     private javax.swing.JComboBox<String> cb_fabricanteCarroceria;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> cb_usuario;
+    private javax.swing.JTextField ct_clave;
+    private javax.swing.JPasswordField ct_clave1;
+    private javax.swing.JPasswordField ct_clave2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JPanel p_autobus;
+    private javax.swing.JPanel p_cambiarClaveUsuario;
     private javax.swing.JPanel p_cliente;
     private javax.swing.JPanel p_factura;
     private javax.swing.JPanel p_principal;
@@ -610,6 +803,5 @@ public class VentanaBajas extends javax.swing.JFrame {
     private javax.swing.JTable t_factura;
     private javax.swing.JTable t_ruta;
     private javax.swing.JTable t_trabajador;
-    private javax.swing.JTable t_usuarios;
     // End of variables declaration//GEN-END:variables
 }

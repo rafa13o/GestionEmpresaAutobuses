@@ -73,11 +73,24 @@ public class Mensajes {
                 mensaje = "No se ha podido dar de baja ningún autobús";
                 mensaje2 = "Por favor, revise que ha seleccionado al menos uno e inténtelo de nuevo";
                 break;
+            case "CLAVES_IGUALES":
+                mensaje = "La nueva contraseña no puede ser igual que la anterior";
+                break;
             case "CLAVES_DISTINTAS":
                 mensaje = "Las contraseñas no son iguales";
                 break;
             case "ACCESO_INCORRECTO":
                 mensaje = "El usuario o la contraseña son incorrectos";
+                break;
+            case "USUARIO_EXISTE":
+                mensaje = "El usuario ya está registrado en la base";
+                break;
+            case "USUARIO_INEXISTENTE":
+                mensaje = "El usuario no está dado de alta en la base";
+                break;
+            case "BAJA_USUARIO":
+                mensaje = "No se ha podido dar de baja a ningún usuario";
+                mensaje2= "Por favor, revise que ha seleccionado un usuario e inténtelo de nuevo";
                 break;
         }
         JOptionPane.showMessageDialog(null, mensaje + ".\n"
@@ -104,6 +117,12 @@ public class Mensajes {
                 break;
             case "AUTOBUS2"://Cuando se eliminan 2 o más autobuses
                 mensaje = "Los autobuses se han dado de baja con éxito";
+                break;
+            case "BAJA_USUARIO":
+                mensaje = "El usuario se ha dado de baja con éxito";
+                break;
+            case "CLAVE_CAMBIADA":
+                mensaje = "La clave ha sido cambiada con éxito";
                 break;
         }
         JOptionPane.showMessageDialog(null, mensaje, "Resultado - GESTIÓN DE EMPRESA ©", 1);
