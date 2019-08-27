@@ -285,6 +285,11 @@ public class GestoraEmpresa {
         return null;
     }
 
+    /**
+     * Devuelve un array sólo con los DNI de los que trabajan en la sección de 
+     * dirección.
+     * @return 
+     */
     public String[] getLosDNIdeDireccion() {
         ArrayList<String> dniDireccion = new ArrayList();
         try {
@@ -659,6 +664,12 @@ public class GestoraEmpresa {
         return null;
     }
 
+    /**
+     * Devuelve los usuarios que pueden acceder al programa para posteriormente 
+     * grabarlos en el archivo usuarios.csv
+     * 
+     * @return 
+     */
     public String[] getLosUsuarios() {
         try {
             String[] usuarios = new String[(losUsuarios.size()) * 2];
